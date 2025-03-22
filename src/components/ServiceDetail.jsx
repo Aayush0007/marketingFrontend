@@ -1,82 +1,83 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import Header from './Header'; // Ensure this path is correct
-import Footer from './Footer'; // Ensure this path is correct
-import { motion } from 'framer-motion'; // Add framer-motion for animation
+import { useEffect, useState } from 'react';
+import Header from './Header';
+import Footer from './Footer';
+import { motion } from 'framer-motion';
+// import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
+// Flattened services data from ServicesSection
 const servicesData = [
-  {
-    id: 0,
-    title: "Web Design",
-    description: "Crafting beautiful, user-focused designs that leave lasting impressions.",
-    details: "Our web design services are tailored to showcase your brand in the best light. We create responsive, visually captivating websites that combine modern aesthetics with user-centric functionality. Whether you need a new design or a revamp, our team ensures every element reflects your unique identity. From layouts to color palettes, we craft designs that balance beauty and usability, optimized for mobile and desktop experiences. Let us help you stand out online with a seamless, memorable web presence."
-  },
-  {
-    id: 1,
-    title: "Frontend Development",
-    description: "Developing interactive, fast, and engaging user interfaces with cutting-edge technologies.",
-    details: "Our frontend development services bring your ideas to life with sleek and intuitive interfaces. Using modern frameworks like React, Vue, and Angular, we focus on creating fast, responsive, and accessible web applications. We prioritize clean code, smooth animations, and seamless navigation, ensuring every interaction feels effortless. Let us build a frontend that not only looks stunning but also performs flawlessly across all devices."
-  },
-  {
-    id: 2,
-    title: "Backend Development",
-    description: "Building reliable and scalable server-side systems for your business needs.",
-    details: "Our backend development services power your digital products with robust and efficient solutions. We specialize in technologies like Node.js, Express, and MongoDB to create APIs, databases, and server logic that integrate seamlessly with your frontend. Our team focuses on security, scalability, and performance optimization, ensuring your backend handles high traffic effortlessly. Whether it’s an e-commerce platform or a custom application, we deliver backend solutions you can rely on."
-  },
-  {
-    id: 3,
-    title: "Graphic Design",
-    description: "Transforming ideas into visuals that captivate and inspire.",
-    details: "Our graphic design services help your brand make a statement. From logos and social media graphics to marketing materials and branding, we create designs that resonate with your audience. Every element is crafted with attention to detail, ensuring your visuals are not just eye-catching but also aligned with your brand’s identity. Let your story come to life through stunning designs that leave a lasting impact."
-  },
-  {
-    id: 4,
-    title: "Digital Marketing",
-    description: "Boosting your online presence with targeted and effective strategies.",
-    details: "Our digital marketing services are designed to help you connect with your audience and achieve your goals. From SEO and social media management to PPC campaigns and email marketing, we use data-driven strategies to maximize your reach and ROI. Whether you’re looking to increase traffic, generate leads, or build brand awareness, our team is here to craft campaigns that deliver real results."
-  },
-  {
-    id: 5,
-    title: "Content Writing",
-    description: "Creating compelling content that informs, engages, and converts.",
-    details: "Our content writing services help you communicate your message effectively. We specialize in crafting high-quality, SEO-friendly content, including blogs, articles, website copy, and newsletters. Our team takes the time to understand your audience and brand voice, ensuring every piece resonates and drives engagement. With a focus on storytelling and clarity, we help your brand connect with your readers on a deeper level."
-  },
-  {
-    id: 6,
-    title: "SEO Services",
-    description: "Driving organic traffic with tailored optimization strategies.",
-    details: "Our SEO services are designed to help your website rank higher and reach more customers. We focus on comprehensive strategies, including keyword research, on-page and off-page optimization, and technical SEO improvements. By understanding your industry and audience, we tailor our approach to meet your business goals. Let us help you dominate search results and drive sustainable growth."
-  },
-  {
-    id: 7,
-    title: "E-commerce Solutions",
-    description: "Creating seamless and secure online stores to grow your business.",
-    details: "Our e-commerce solutions are designed to turn visitors into loyal customers. From user-friendly navigation to secure payment gateways, we build online stores that prioritize the shopping experience. Whether you’re starting from scratch or optimizing an existing platform, we provide scalable solutions tailored to your needs. Let us help you sell smarter and grow faster in the competitive online marketplace."
-  },
-  {
-    id: 8,
-    title: "App Development",
-    description: "Building custom, feature-rich apps for a variety of platforms.",
-    details: "Our app development services bring your ideas to life with innovative and user-friendly solutions. Whether it’s for Android, iOS, or both, we handle everything from design to deployment. Our team focuses on performance, security, and scalability, ensuring your app stands out in a crowded market. Whether it’s for business, entertainment, or e-commerce, we deliver apps that delight users and meet your objectives."
-  },
-  {
-    id: 9,
-    title: "IT Support and Maintenance",
-    description: "Ensuring your systems run smoothly and efficiently.",
-    details: "Our IT support and maintenance services keep your digital infrastructure secure and up-to-date. From regular updates and troubleshooting to proactive monitoring and security patches, we ensure your business operates without interruptions. Our team is always ready to provide timely solutions, helping you minimize downtime and maximize productivity."
-  }
+  { id: 0, title: "Billboard Advertising", description: "Maximize your brand’s reach with eye-catching, strategically placed billboards on highways, busy streets, and prime locations.", details: "Our billboard advertising services are designed to maximize your brand’s reach by placing eye-catching billboards in strategic locations such as highways, busy streets, and prime urban areas. We focus on high-visibility spots to ensure your message reaches a wide audience, driving brand awareness and engagement." },
+  { id: 1, title: "Hoarding Advertising", description: "Make a bold statement with large outdoor hoardings on prominent buildings and open spaces, ensuring wide visibility.", details: "Our hoarding advertising services allow you to make a bold statement with large-scale outdoor hoardings on prominent buildings and open spaces. We ensure wide visibility by selecting high-traffic locations, helping your brand stand out and capture the attention of potential customers." },
+  { id: 2, title: "Digital Out-of-Home (DOOH)", description: "Engage your audience with dynamic, interactive digital displays like LED screens, video walls, and touch-screen kiosks.", details: "Our Digital Out-of-Home (DOOH) services engage your audience with dynamic and interactive digital displays, including LED screens, video walls, and touch-screen kiosks. We leverage cutting-edge technology to create captivating advertisements that drive engagement and leave a lasting impression." },
+  { id: 3, title: "Comprehensive Online Strategies", description: "Boost your online presence with result-driven digital marketing plans across social media, search engines, and websites.", details: "Our comprehensive online strategies are designed to boost your online presence through result-driven digital marketing plans. We cover social media, search engines, and websites, ensuring a cohesive approach that maximizes your reach and delivers measurable results." },
+  { id: 4, title: "Social Media Marketing", description: "Create impactful campaigns on Facebook, Instagram, Twitter, and LinkedIn to increase brand awareness.", details: "Our social media marketing services create impactful campaigns on platforms like Facebook, Instagram, Twitter, and LinkedIn. We focus on increasing brand awareness by crafting targeted content that resonates with your audience and drives engagement." },
+  { id: 5, title: "Search Engine Optimization (SEO)", description: "Optimize your website to rank higher on Google and drive organic traffic.", details: "Our SEO services optimize your website to rank higher on Google, driving organic traffic through comprehensive strategies. We focus on keyword research, on-page and off-page optimization, and technical SEO to ensure your site performs at its best in search results." },
+  { id: 6, title: "Pay-Per-Click (PPC) Advertising", description: "Achieve cost-effective customer acquisition through targeted PPC campaigns.", details: "Our Pay-Per-Click (PPC) advertising services help you achieve cost-effective customer acquisition through targeted campaigns. We optimize your ads for maximum ROI, ensuring you reach the right audience at the right time." },
+  { id: 7, title: "Content Marketing", description: "Tell your brand’s story with engaging blog posts, articles, videos, and infographics.", details: "Our content marketing services tell your brand’s story through engaging blog posts, articles, videos, and infographics. We create high-quality, SEO-friendly content that informs, engages, and converts your audience." },
+  { id: 8, title: "Email Marketing", description: "Connect directly with your audience through personalized email campaigns.", details: "Our email marketing services connect you directly with your audience through personalized campaigns. We design emails that resonate with your subscribers, driving engagement and conversions." },
+  { id: 9, title: "Conversion Rate Optimization (CRO)", description: "Enhance your website’s performance to increase visitor actions and conversions.", details: "Our Conversion Rate Optimization (CRO) services enhance your website’s performance to increase visitor actions and conversions. We analyze user behavior and implement data-driven improvements to maximize your site’s effectiveness." },
+  { id: 10, title: "Online Reputation Management (ORM)", description: "Protect and manage your brand’s online image by addressing feedback.", details: "Our Online Reputation Management (ORM) services protect and manage your brand’s online image by addressing feedback and reviews. We help you maintain a positive reputation across digital platforms." },
+  { id: 11, title: "Video Marketing", description: "Create compelling video content that resonates with your audience.", details: "Our video marketing services create compelling video content that resonates with your audience. We produce high-quality videos that tell your brand’s story and drive engagement across platforms." },
+  { id: 12, title: "Analytics and Reporting", description: "Track campaign performance with detailed analytics for data-driven decisions.", details: "Our analytics and reporting services track your campaign performance with detailed insights. We provide data-driven reports to help you make informed decisions and optimize your marketing strategies." },
+  { id: 13, title: "Brand Identity Development", description: "Stand out with a unique brand identity, including logo design and messaging.", details: "Our brand identity development services help you stand out with a unique identity, including logo design, messaging, and visual elements. We create a cohesive brand image that resonates with your audience." },
+  { id: 14, title: "Campaign Management", description: "Execute impactful marketing campaigns across multiple channels.", details: "Our campaign management services execute impactful marketing campaigns across multiple channels. We handle planning, execution, and optimization to ensure your campaigns deliver maximum results." },
+  { id: 15, title: "Event Marketing", description: "Organize memorable events to enhance brand recognition and connections.", details: "Our event marketing services organize memorable events to enhance brand recognition and connections. We manage every detail to create experiences that leave a lasting impression on your audience." },
+  { id: 16, title: "Vendor Management", description: "Ensure seamless execution of marketing initiatives with reliable vendors.", details: "Our vendor management services ensure seamless execution of marketing initiatives by working with reliable vendors. We coordinate all aspects to deliver high-quality results on time." },
+  { id: 17, title: "Custom Digital Solutions", description: "Craft modern, responsive websites and mobile applications tailored to your needs.", details: "Our custom digital solutions craft modern, responsive websites and mobile applications tailored to your needs. We focus on functionality, design, and performance to deliver solutions that meet your business goals." },
+  { id: 18, title: "Full-Stack Development", description: "Frontend and backend solutions using React, Node.js, and PostgreSQL.", details: "Our full-stack development services provide frontend and backend solutions using technologies like React, Node.js, and PostgreSQL. We build robust, scalable applications that integrate seamlessly." },
+  { id: 19, title: "E-commerce & SaaS Platforms", description: "Build scalable solutions for online businesses and SaaS applications.", details: "Our e-commerce and SaaS platform services build scalable solutions for online businesses and applications. We focus on user experience, security, and performance to help you grow." },
+  { id: 20, title: "Mobile App Development", description: "Develop native Android and cross-platform apps with React Native.", details: "Our mobile app development services develop native Android and cross-platform apps using React Native. We create feature-rich, user-friendly apps that perform flawlessly across devices." },
+  { id: 21, title: "UI/UX Design & Prototyping", description: "Create visually appealing and interactive designs with SEO optimization.", details: "Our UI/UX design and prototyping services create visually appealing and interactive designs with SEO optimization. We focus on user experience to ensure your digital products are both beautiful and functional." },
+  { id: 22, title: "Optimized Cloud Infrastructure", description: "Deliver scalable, secure, and cost-effective cloud solutions using AWS and Docker.", details: "Our optimized cloud infrastructure services deliver scalable, secure, and cost-effective solutions using AWS and Docker. We ensure your systems are reliable and ready to handle growth." },
+  { id: 23, title: "Scalable System & Database Architecture", description: "Build robust backend systems for seamless performance.", details: "Our scalable system and database architecture services build robust backend systems for seamless performance. We design solutions that handle high traffic and ensure reliability." },
+  { id: 24, title: "SEO & Website Optimization", description: "Improve visibility and performance with advanced SEO strategies.", details: "Our SEO and website optimization services improve visibility and performance with advanced strategies. We focus on technical SEO, content optimization, and user experience to drive results." },
+  { id: 25, title: "Marketing Automation & CRM Development", description: "Streamline client engagement with automated systems.", details: "Our marketing automation and CRM development services streamline client engagement with automated systems. We help you manage leads and customers more effectively." },
+  { id: 26, title: "High-Resolution Image Processing & AI Integrations", description: "Enhance visual experiences with cutting-edge technology.", details: "Our high-resolution image processing and AI integration services enhance visual experiences with cutting-edge technology. We leverage AI to create smarter, more engaging solutions." },
 ];
+
+// const testimonials = [
+//   { id: 1, name: 'John Doe', feedback: 'Amazing service! Highly recommended for startups.' },
+//   { id: 2, name: 'Jane Smith', feedback: 'Professional and timely delivery. Great team!' },
+//   { id: 3, name: 'Mike Johnson', feedback: 'Our website traffic doubled within months!' },
+// ];
+
 const ServiceDetail = () => {
   const { id } = useParams();
-  const service = servicesData[id];
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const service = servicesData.find((s) => s.id === Number(id));
 
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => setLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, [id]);
+
+  // Modified scrollToSection to avoid redirecting to homepage unless necessary
   const scrollToSection = (sectionId) => {
-    navigate('/');
-    setTimeout(() => {
+    // Check if we're already on the homepage
+    if (window.location.pathname === '/') {
       const element = document.getElementById(sectionId);
-      element?.scrollIntoView({ behavior: 'smooth' });
-    }, 100); // Delay to ensure the home page loads before scrolling
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        console.warn(`Section with ID "${sectionId}" not found on homepage.`);
+      }
+    } else {
+      // If not on homepage, navigate to homepage with the section hash
+      navigate(`/#${sectionId}`);
+    }
   };
+
+  if (loading) {
+    return (
+      <div className="max-w-7xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-8 text-center">
+        <h2 className="text-2xl font-semibold text-gray-500">Loading...</h2>
+      </div>
+    );
+  }
 
   if (!service) {
     return (
@@ -90,145 +91,87 @@ const ServiceDetail = () => {
     <>
       <Header scrollToSection={scrollToSection} />
       <motion.div
-        className="max-w-7xl mx-auto p-8 bg-white shadow-lg rounded-lg mt-24 transform transition-transform hover:scale-105"
+        className="max-w-7xl mx-auto p-10 bg-gradient-to-r from-yellow-100 to-green-200 shadow-xl rounded-lg mt-24 transform transition-transform hover:scale-105"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        {/* Service Title */}
-        <h2 className="text-5xl font-extrabold mb-6 text-center text-gray-800">
-          {service.title}
-        </h2>
-        <p className="text-gray-700 text-lg leading-relaxed mb-6 text-center">
-          {service.description}
-        </p>
+        <h2 className="text-5xl font-extrabold mb-8 text-center text-green-800">{service.title}</h2>
+        <p className="text-gray-700 text-lg leading-relaxed mb-8 text-center">{service.description}</p>
 
-        {/* Key Features */}
         <motion.div
-          className="mt-8 p-6 bg-gray-50 rounded-lg shadow-lg"
+          className="mt-10 p-8 bg-white rounded-xl shadow-lg"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h3 className="text-3xl font-semibold mb-4 text-gray-800">Key Features</h3>
-          <ul className="list-disc pl-5 space-y-2 text-gray-700">
-            <li>Customizable and tailored solutions for your unique needs.</li>
-            <li>Cutting-edge technology to ensure scalability and performance.</li>
-            <li>Responsive designs and seamless user experiences.</li>
-            <li>Reliable support and maintenance for long-term success.</li>
+          <h3 className="text-3xl font-semibold mb-6 text-green-700">Key Features</h3>
+          <ul className="list-disc pl-8 space-y-4 text-gray-700">
+            <li>Customizable solutions tailored to your needs.</li>
+            <li>Cutting-edge technology for performance.</li>
+            <li>Seamless user experience with responsive designs.</li>
+            <li>Ongoing support and maintenance.</li>
           </ul>
         </motion.div>
 
-        {/* Detailed Overview */}
         <motion.div
-          className="mt-12 p-6 bg-gray-50 rounded-lg shadow-lg"
+          className="mt-12 p-8 bg-white rounded-xl shadow-lg"
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h3 className="text-3xl font-semibold text-gray-800 mb-4">Detailed Overview</h3>
+          <h3 className="text-3xl font-semibold text-green-700 mb-6">Detailed Overview</h3>
           <p className="text-gray-700 text-lg leading-relaxed">{service.details}</p>
         </motion.div>
 
-        {/* Why Choose Us */}
-        <motion.div
-          className="mt-12 p-6 bg-gray-50 rounded-lg shadow-lg"
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h3 className="text-3xl font-semibold text-gray-800 mb-4">Why Choose Us?</h3>
-          <p className="text-gray-700 text-lg leading-relaxed">
-            We believe in delivering quality services that align with your goals. Our team of
-            professionals is passionate about innovation, attention to detail, and providing
-            exceptional value. Choose us to experience a partnership that drives results.
-          </p>
-        </motion.div>
-
-        {/* Testimonials Section */}
-        <motion.div
-          className="mt-12 p-6 bg-gray-50 rounded-lg shadow-lg"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, staggerChildren: 0.2 }}
-        >
-          <h3 className="text-3xl font-semibold text-gray-800 mb-4">What Our Clients Say</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <motion.div
-              className="flex items-start space-x-4 bg-gray-100 p-6 rounded-lg shadow-md hover:scale-105 transition-all"
-              whileHover={{ scale: 1.05 }}
-            >
-              <img
-                src="https://placehold.co/60x60/FFD700/000000.png?text=JD"
-                alt="Client"
-                className="h-14 w-14 rounded-full border-4 border-yellow-500 transform transition-all hover:scale-110"
-              />
-              <div>
-                <p className="text-gray-700 text-lg">
-                  "The team delivered beyond expectations. Our website's new design has drastically
-                  improved user engagement."
-                </p>
-                <span className="text-sm text-gray-500">John Doe, CEO at XYZ Corp</span>
+        {/* Testimonials Carousel */}
+        {/* <div className="mt-16 bg-white p-8 rounded-xl shadow-lg">
+          <h3 className="text-3xl font-semibold text-green-700 mb-6 text-center">Client Testimonials</h3>
+          <Carousel showArrows={false} showThumbs={false} autoPlay infiniteLoop>
+            {testimonials.map((testimonial) => (
+              <div key={testimonial.id} className="p-6">
+                <p className="text-lg italic text-gray-600">"{testimonial.feedback}"</p>
+                <h4 className="mt-4 font-semibold text-green-800">- {testimonial.name}</h4>
               </div>
-            </motion.div>
-            <motion.div
-              className="flex items-start space-x-4 bg-gray-100 p-6 rounded-lg shadow-md hover:scale-105 transition-all"
-              whileHover={{ scale: 1.05 }}
-            >
-              <img
-                src="https://placehold.co/60x60/FFD700/000000.png?text=JS"
-                alt="Client"
-                className="h-14 w-14 rounded-full border-4 border-yellow-500 transform transition-all hover:scale-110"
-              />
-              <div>
-                <p className="text-gray-700 text-lg">
-                  "Their commitment to quality and attention to detail is unmatched. Highly
-                  recommend!"
-                </p>
-                <span className="text-sm text-gray-500">Jane Smith, Marketing Director</span>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Related Services Section */}
-        <motion.div
-          className="mt-12 p-6 bg-gray-50 rounded-lg shadow-lg"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h3 className="text-3xl font-semibold text-gray-800 mb-4">Related Services</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {Object.keys(servicesData).slice(0, 3).map((key) => (
-              <motion.div
-                key={key}
-                className="p-6 bg-gray-100 rounded-lg shadow-md hover:bg-gray-200 transition-all"
-                whileHover={{ scale: 1.05 }}
-              >
-                <h4 className="text-xl font-semibold text-gray-800">{servicesData[key].title}</h4>
-                <p className="text-gray-600 mt-2">{servicesData[key].description}</p>
-              </motion.div>
             ))}
-          </div>
-        </motion.div>
+          </Carousel>
+        </div> */}
 
-        {/* CTA Button */}
+        {/* Related Services */}
+        <div className="mt-16 p-8 bg-white rounded-xl shadow-lg">
+          <h3 className="text-3xl font-semibold text-green-700 mb-6 text-center">Related Services</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {servicesData
+              .filter((s) => s.id !== Number(id))
+              .slice(0, 3)
+              .map((relatedService) => (
+                <div
+                  key={relatedService.id}
+                  onClick={() => navigate(`/service/${relatedService.id}`)}
+                  className="cursor-pointer p-6 bg-yellow-100 hover:bg-yellow-200 rounded-lg shadow-md transition duration-300"
+                >
+                  <h4 className="text-xl font-semibold text-green-800">{relatedService.title}</h4>
+                  <p className="text-gray-700 text-sm mt-2">{relatedService.description}</p>
+                </div>
+              ))}
+          </div>
+        </div>
+
         <motion.div
-          className="text-center mt-12"
+          className="text-center mt-16"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           <button
             onClick={() => navigate('/contact')}
-            className="bg-red-600 text-white px-8 py-4 rounded-full hover:shadow-xl transform hover:-translate-y-1 transition-all"
+            className="bg-green-600 text-white px-10 py-4 rounded-full hover:shadow-xl transform hover:-translate-y-1 transition-all"
           >
             Book Your Appointment Now
           </button>
         </motion.div>
       </motion.div>
-      <Footer scrollToSection={scrollToSection} /> {/* Pass scrollToSection to Footer */}
+      <Footer scrollToSection={scrollToSection} />
     </>
   );
 };

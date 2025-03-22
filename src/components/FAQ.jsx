@@ -36,30 +36,31 @@ const FAQ = () => {
   };
 
   return (
-    <section className="faq-section py-16 px-4 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl md:text-4xl text-center font-extrabold bg-gradient-to-r from-green-600 to-green-900 bg-clip-text text-transparent"
-        style={{
-            fontFamily: "Pacifico, cursive",
-            lineHeight: "1.8",
-          }}>FAQ</h2>
+    <section className="py-20 px-6 bg-gradient-to-r from-yellow-50 via-green-50 to-lime-50">
+      <div className="max-w-5xl mx-auto">
+        <h2 
+          className="text-4xl md:text-5xl text-center font-extrabold bg-gradient-to-r from-green-800 to-yellow-700 bg-clip-text text-transparent mb-10"
+          style={{ fontFamily: "Pacifico, cursive", lineHeight: "1.8" }}
+        >
+          FAQ
+        </h2>
         <div className="space-y-6">
           {faqData.map((item, index) => (
             <motion.div
               key={index}
-              className="faq-item bg-white p-6 rounded-lg shadow-lg cursor-pointer"
+              className="faq-item bg-white p-6 rounded-xl shadow-xl cursor-pointer border border-yellow-500"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
               onClick={() => toggleFAQ(index)}
             >
-              <div className="faq-question flex justify-between items-center text-lg font-semibold text-gray-800">
+              <div className="faq-question flex justify-between items-center text-lg font-semibold text-gray-900">
                 <span>{item.question}</span>
-                <span>{activeIndex === index ? '-' : '+'}</span>
+                <span className="text-yellow-700 text-2xl">{activeIndex === index ? '-' : '+'}</span>
               </div>
               {activeIndex === index && (
                 <motion.div
-                  className="faq-answer mt-4 text-gray-600"
+                  className="faq-answer mt-4 text-gray-700"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}

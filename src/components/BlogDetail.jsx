@@ -1,66 +1,19 @@
 import React, { useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import Header from "./Header"; // Ensure this path is correct
-import Footer from "./Footer"; // Ensure this path is correct
+import { useNavigate, useParams } from "react-router-dom";
+import { ChevronLeft } from "lucide-react";
+import Header from "./Header";
+import Footer from "./Footer";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { motion } from "framer-motion";
+import { Helmet } from "react-helmet"; // For SEO
+import { blogs } from "../data/blogs"; // Import centralized data
+import {  FaLinkedin, FaWhatsapp } from "react-icons/fa"; // For social sharing
+import { FaXTwitter } from "react-icons/fa6";
 
-const blogs = [
-  {
-    id: 1,
-    title: "Web Design Trends to Watch in 2025",
-    summary:
-      "Explore the latest web design trends for 2025, from minimalist layouts to immersive animations, and how these trends can enhance your brand’s online presence.",
-    content:
-      "Looking ahead to 2025, web design is evolving to be even more user-centric. The focus is shifting towards minimalist layouts that reduce distractions, allowing content to shine through. Bold typography is taking center stage, making it easier to grab users' attention and deliver key messages. In addition, immersive animations are guiding users through websites, creating a dynamic, engaging experience. With mobile-first design being the norm, ensuring your site is responsive across all devices is more important than ever. Add interactive elements like scroll-triggered animations and video backgrounds, and your website will not only look modern but also create an unforgettable experience for users. The future of web design is all about accessibility, simplicity, and engagement—so stay ahead of the curve and keep users coming back for more.",
-    imageUrl:
-      "https://media-hosting.imagekit.io//33ca826fb6884b13/freepik__upload__84602.png?Expires=1831307040&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=Oxr8H5peyQNL396K2KnAP~AIlbkvHnhYUuuYN2uNie2cEwhAyXF3dGZbexYdBoSlJIrX9J2kFAvMfpHlBq-wiocCgEk7mdqcR9qcMflRaeRiRENh5NF4d9f~AwCFDuq80b~dugRUmxu1KBEn0r7PF9ipkEh66AmOBh8OhfI03Iq66xh~OJttXe9m0euiHuD3CuikJtsc42IAHPXtZ6K6jh~hOUfQREQF-LalOtIJg78BKp1tDTq3hpAeVGYutj6GMw2lud3QG4jzzOU-WfV0gPp~fCQWSyEpyMscfnwYKFglwyaZ5QHtakTH6V52K9Aq2HWhgA~65bsqohHLl7Jeaw__",
-  },
-  {
-    id: 2,
-    title: "How Frontend Development Shapes User Experience",
-    summary:
-      "Learn how frontend development is crucial to shaping an intuitive, user-friendly web experience, from responsiveness to dynamic interactions.",
-    content:
-      "Frontend development is key to creating an enjoyable and intuitive user experience. It’s about making websites that are not only visually appealing but also fast and easy to navigate. With more people browsing on mobile devices, responsive design is essential to ensure that websites look great on any screen size. Speed is another big factor; nobody likes a slow website. By optimizing images, compressing files, and improving code, you can make sure your website loads quickly. But it’s not just about speed—navigation matters too. A website with clear menus and simple structure will always perform better than one that’s confusing to use. With the help of frameworks like React, Vue.js, and Angular, developers can create dynamic user interfaces that feel fast, fluid, and engaging. Frontend development is all about making your site not just work, but work beautifully for every user.",
-    imageUrl:
-      "https://media-hosting.imagekit.io//d2cd203377534b3b/modern-web-design-concept-with-flat-design.png?Expires=1831307350&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=YH8JrwTvL3~It1BhRaxRRjUsRqSQUD6uy3da9W2288NhDLN-OqM2Llb~ZrD27rxSWsoaZkkbVwD~ZDkl7GksIHnTvhMjS4CWkRVIFa5RkYIV3-TNvZpyRWhxa7AsE4AE2X8Siu6mpX6KKicXsUshVRrS78osWjxkeqgNOqazEyDOvNMwHbLZB4mVpR9B8ZR50i5Rta33oVw91SoLJP1c-0~YL6CTf6Ler2-WpXUiEJ8fa7ZVnaxZ1NgU5UHdRv89kd7r9IQirls7CmZfzFiR0ce3A0Mee8aq2JxghJnLFonlXhlFkSkWs79N4A8HBNiCMFuTXGhxSZcIfmKEuhVpIw__",
-  },
-  {
-    id: 3,
-    title: "The Importance of Scalable Backend Architecture",
-    summary:
-      "Understand why scalable backend architecture is crucial for handling increased traffic, maintaining security, and ensuring a smooth user experience.",
-    content:
-      "Scalable backend architecture is the backbone of a robust web application. As your user base grows, so does the need for your site to handle increased traffic without compromising performance. A scalable backend, built with technologies like Node.js and Express, allows your application to expand smoothly as demands rise. Security also plays a huge role—after all, you're dealing with sensitive user data. By implementing encryption, strong authentication, and regular security audits, you can protect your site from potential threats. Scalable systems can also balance loads across servers, ensuring performance stays optimal even during high-traffic periods. Microservices architecture makes scaling even easier, allowing individual parts of your application to grow independently. With a solid backend in place, your website can scale effectively while maintaining security and high performance.",
-    imageUrl:
-      "https://media-hosting.imagekit.io//66cd566bc6f546f4/modern-web-design-concept-with-flat-design.png?Expires=1831307486&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=VZJmx3rnOoQARZB7TKKPkk2P3pbz9yuVSmSYPAsz-9N3h3rUkAQZ28aA6Ka89NfrWD6XXiz7thctVUJ79MDJxFklgNV8h7xlAEmDMCVuR2o3cTFMCTl82U50ClRW0yTjaY7WhB6OrAZVc9JSQtW-dBeE8hs4gyEEsyaxhYwmZA1BGUwjPxsSiu4m~elxVdzfeislpGeE4CgekfAP3QJivodbEORFLgJRTDGMJbrE89IZDxCXk201viEMPc0gw~KZQ-fW4rl~8UnMECcD3GCS2IYp-hrR7gk3A66qMvEU7CQcVgoils684R3bkeb8Yg9hrDzVnVUGbftlNYmleLty~w__",
-  },
-  {
-    id: 4,
-    title: "The Power of SEO for Web Design",
-    summary:
-      "Discover how integrating SEO best practices into your web design can help boost visibility and drive more traffic to your site.",
-    content:
-      "Search engine optimization (SEO) is critical for making your website discoverable on the web. You can have a beautifully designed site, but if it’s not optimized for search engines, it won’t reach your target audience. SEO starts with clean, semantic HTML, which makes it easier for search engines to crawl your site. Site speed is also important—Google favors fast-loading sites, so optimizing images, using caching, and leveraging content delivery networks (CDNs) can help improve your load times. Ensuring your website is mobile-friendly is another SEO must, as more users are browsing on mobile devices than ever before. Additionally, optimizing images with descriptive alt text and relevant filenames can help improve your SEO ranking. By incorporating these SEO best practices, your website will not only look great but also rank higher in search results, bringing in more visitors.",
-    imageUrl: "#",
-  },
-  {
-    id: 5,
-    title: "Why Your Website Needs Regular Frontend Updates",
-    summary:
-      "Regular frontend updates are essential to maintaining security, performance, and user experience on your website.",
-    content:
-      "Keeping your website’s frontend up to date is essential for its performance and security. Technology moves fast, and regularly updating your site ensures it stays compatible with the latest standards. Updates also provide access to the latest security patches, protecting your site from potential vulnerabilities. But it's not just about security—frontend updates bring new features and functionality that can improve user experience. Optimizing code, compressing images, and implementing modern performance techniques can help speed up your site, making it run smoothly. Regular updates also ensure that your website remains compatible with the latest browsers and accessible to all users, including those with disabilities. Stay ahead of the game by keeping your site fresh and up-to-date.",
-    imageUrl: "#",
-  },
-  {
-    id: 6,
-    title: "Backend Development: Key to Building Robust Web Applications",
-    summary:
-      "Backend development is crucial for creating the foundation of a strong, scalable, and secure web application.",
-    content:
-      "Backend development is the backbone of any web application. It handles everything behind the scenes, from database management to server-side logic, ensuring your site runs smoothly and securely. A robust backend architecture is vital for scalability, allowing your site to handle growing traffic and demands. Security is also a top priority, as you’ll need to protect sensitive user data. By implementing encryption, strong authentication methods, and regular security updates, you can ensure your backend remains secure. The backend also plays a major role in performance, with efficient database queries and load balancing techniques ensuring a seamless user experience even during traffic spikes. With a solid backend, your web application will be ready for anything.",
-    imageUrl: "#",
-  },
+// Sample Related Services (updated to use existing sections)
+const relatedServices = [
+  { id: 1, title: "SEO Optimization", description: "Boost your website ranking with our global SEO services.", sectionId: "services" },
+  { id: 2, title: "Social Media Marketing", description: "Expand your audience reach worldwide with AI-driven strategies.", sectionId: "services" },
 ];
 
 const BlogDetail = () => {
@@ -68,23 +21,36 @@ const BlogDetail = () => {
   const blog = blogs.find((b) => b.id === parseInt(id));
   const navigate = useNavigate();
 
+  // Define related blogs inside the component to use useParams
+  const relatedBlogs = blogs.filter((b) => b.id !== parseInt(id)).slice(0, 3);
+
   useEffect(() => {
     if (!blog) {
-      navigate("/blogs"); // Redirect to blogs if blog not found
+      navigate("/#blog"); // Redirect to the blog section if blog not found
     }
   }, [blog, navigate]);
 
+  // Updated scrollToSection to match ServiceDetail
   const scrollToSection = (sectionId) => {
-    navigate('/');
-    setTimeout(() => {
+    if (window.location.pathname === '/') {
       const element = document.getElementById(sectionId);
-      element?.scrollIntoView({ behavior: 'smooth' });
-    }, 100); // Delay to ensure the home page loads before scrolling
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        console.warn(`Section with ID "${sectionId}" not found on homepage.`);
+      }
+    } else {
+      navigate(`/#${sectionId}`);
+    }
   };
+
+  // Social Share URLs
+  const shareUrl = `https://www.marketingbirbal.com/blog/${id}`;
+  const shareText = `Check out this blog post: ${blog?.title} - ${blog?.summary} #DigitalMarketing #SEO`;
 
   if (!blog) {
     return (
-      <div className="flex justify-center items-center h-screen bg-gradient-to-r from-gray-200 via-gray-300 to-gray-400 text-gray-800 text-xl font-semibold">
+      <div className="flex justify-center items-center h-screen bg-gradient-to-r from-yellow-200 via-green-200 to-yellow-300 text-gray-800 text-xl font-semibold">
         Blog not found
       </div>
     );
@@ -92,33 +58,232 @@ const BlogDetail = () => {
 
   return (
     <>
+      <Helmet>
+        <title>{`${blog.title} | MarketingBirbal - Best Global Digital Marketing Blog 2025`}</title>
+        <meta
+          name="description"
+          content={`Read ${blog.title} on MarketingBirbal, a global digital marketing agency. Learn about AI-powered marketing, voice search optimization, video marketing strategies, and sustainable marketing for 2025.`}
+        />
+        <meta
+          name="keywords"
+          content={`digital marketing blog, ${blog.title.toLowerCase()}, AI-powered digital marketing, voice search optimization 2025, video marketing strategies 2025, sustainable marketing, e-commerce SEO services, global digital marketing agency, international SEO services, MarketingBirbal`}
+        />
+        <meta property="og:title" content={`${blog.title} | MarketingBirbal`} />
+        <meta
+          property="og:description"
+          content={`Discover ${blog.title} and more global digital marketing insights on MarketingBirbal, serving all marketing types worldwide.`}
+        />
+        <meta property="og:image" content={blog.imageUrl || "%PUBLIC_URL%/og-image.png"} />
+        <meta property="og:url" content={shareUrl} />
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${blog.title} | MarketingBirbal`} />
+        <meta
+          name="twitter:description"
+          content={`Discover ${blog.title} and more global digital marketing insights on MarketingBirbal.`}
+        />
+        <meta name="twitter:image" content={blog.imageUrl || "%PUBLIC_URL%/og-image.png"} />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            "headline": blog.title,
+            "description": blog.summary,
+            "image": blog.imageUrl,
+            "datePublished": "2025-03-21", // Replace with actual publish date
+            "author": {
+              "@type": "Organization",
+              "name": "MarketingBirbal",
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "MarketingBirbal",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "%PUBLIC_URL%/logo.png",
+              },
+            },
+            "keywords": [
+              "digital marketing blog",
+              "AI-powered digital marketing",
+              "voice search optimization 2025",
+              "video marketing strategies 2025",
+              "sustainable marketing",
+              "e-commerce SEO services",
+              "global digital marketing agency",
+              "international SEO services",
+            ],
+          })}
+        </script>
+      </Helmet>
       <Header scrollToSection={scrollToSection} />
-      <div className="max-w-7xl mx-auto p-6 bg-gradient-to-br from-gray-100 via-gray-200 to-gray-300 text-gray-800 shadow-lg rounded-lg mt-24 transform transition-all ease-in-out duration-500 hover:scale-105 hover:shadow-xl">
+      <div className="max-w-5xl mx-auto px-6 py-10 bg-gradient-to-br from-yellow-100 via-green-50 to-yellow-200 text-gray-900 shadow-lg rounded-lg mt-24 transition-all duration-500 hover:shadow-xl">
         {/* Back Button */}
-        <button
-          onClick={() => navigate("/")} // This ensures the back button navigates to the /blogs section
-          className="bg-gray-800 text-white p-2 rounded-md mb-6 hover:bg-gray-700 transition-all duration-300"
+        <motion.button
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+          onClick={() => navigate("/#blog")}
+          className="flex items-center space-x-2 text-lg font-semibold text-gray-700 hover:text-green-700 transition-all duration-300 mb-6"
         >
-          Back to Blogs
-        </button>
+          <ChevronLeft size={22} />
+          <span>Back to Blogs</span>
+        </motion.button>
 
-        <div className="relative mb-8">
-          <img
-            src={blog.imageUrl}
-            alt={blog.title}
-            className="w-full h-72 object-cover rounded-lg shadow-lg opacity-80"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-40 rounded-lg"></div>
-        </div>
-        <h2 className="text-4xl font-bold mb-4">{blog.title}</h2>
-        <p className="text-xl font-semibold text-gray-600 mb-6">
+        {/* Blog Image */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative mb-8"
+        >
+          {blog.imageUrl && blog.imageUrl !== "#" ? (
+            <img
+              src={blog.imageUrl}
+              alt={blog.title}
+              loading="lazy"
+              className="w-full h-80 object-cover rounded-xl shadow-lg"
+            />
+          ) : (
+            <div className="w-full h-80 bg-gray-200 rounded-xl shadow-lg flex items-center justify-center text-gray-500">
+              No Image Available
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-40 rounded-xl"></div>
+        </motion.div>
+
+        {/* Blog Content */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="text-5xl font-extrabold text-green-900 mb-4"
+        >
+          {blog.title}
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="text-xl font-semibold text-gray-700 mb-6"
+        >
           {blog.summary}
-        </p>
-        <div className="bg-white p-6 rounded-lg shadow-md space-y-6">
-          <p className="text-gray-700 text-lg leading-relaxed">
-            {blog.content}
+        </motion.p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="bg-white p-6 rounded-xl shadow-md space-y-6 leading-relaxed border-2 border-transparent hover:border-green-200 transition-all duration-300"
+        >
+          <p className="text-gray-700 text-lg">{blog.content}</p>
+          {/* Internal Link Example */}
+          <p className="text-gray-700 text-lg">
+            Want to learn more about how AI can transform your marketing? Check out our blog on{" "}
+            <a
+              href="/blog/2"
+              className="text-green-700 hover:underline"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate("/blog/2");
+              }}
+            >
+              AI-Powered Digital Marketing Strategies for 2025
+            </a>.
           </p>
-        </div>
+        </motion.div>
+
+        {/* Social Share Buttons */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-6 flex items-center space-x-4"
+        >
+          <h3 className="text-lg font-semibold text-gray-800">Share this post:</h3>
+          <div className="flex space-x-3">
+            <a
+              href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-blue-100 p-3 rounded-full hover:bg-green-600 transition-all duration-300 transform hover:scale-105"
+              aria-label="Share on Twitter"
+            >
+              <FaXTwitter size={22} />
+            </a>
+            <a
+              href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-blue-100 p-3 rounded-full hover:bg-green-600 transition-all duration-300 transform hover:scale-105"
+              aria-label="Share on LinkedIn"
+            >
+              <FaLinkedin size={22} />
+            </a>
+            <a
+              href={`https://wa.me/?text=${encodeURIComponent(shareText + " " + shareUrl)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-green-100 p-3 rounded-full hover:bg-green-600 transition-all duration-300 transform hover:scale-105"
+              aria-label="Share on WhatsApp"
+            >
+              <FaWhatsapp size={22} />
+            </a>
+          </div>
+        </motion.div>
+
+        {/* Related Services */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-12 bg-yellow-50 p-6 rounded-xl shadow-md"
+        >
+          <h3 className="text-3xl font-bold text-green-900 mb-4">Related Services</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+            {relatedServices.map((service) => (
+              <div
+                key={service.id}
+                className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-300"
+              >
+                <h4 className="text-xl font-semibold text-gray-800">{service.title}</h4>
+                <p className="text-gray-600 text-sm">{service.description}</p>
+                <button
+                  onClick={() => scrollToSection(service.sectionId)}
+                  className="mt-2 text-green-700 hover:text-green-900 font-semibold transition-all duration-300"
+                >
+                  Learn More →
+                </button>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Related Blog Posts */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mt-12 bg-yellow-50 p-6 rounded-xl shadow-md"
+        >
+          <h3 className="text-3xl font-bold text-green-900 mb-4">Related Blog Posts</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {relatedBlogs.map((relatedBlog) => (
+              <div
+                key={relatedBlog.id}
+                className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition-all duration-300"
+              >
+                <h4 className="text-xl font-semibold text-gray-800">{relatedBlog.title}</h4>
+                <p className="text-gray-600 text-sm">{relatedBlog.summary}</p>
+                <button
+                  onClick={() => navigate(`/blog/${relatedBlog.id}`)}
+                  className="mt-2 text-green-700 hover:text-green-900 font-semibold transition-all duration-300"
+                >
+                  Read More →
+                </button>
+              </div>
+            ))}
+          </div>
+        </motion.div>
       </div>
       <Footer scrollToSection={scrollToSection} />
     </>

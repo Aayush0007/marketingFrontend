@@ -4,10 +4,10 @@ import {
   FaPhone,
   FaMapPin,
   FaFacebook,
-  FaTwitter,
   FaInstagram,
-  FaGithub,
+  FaLinkedin,
 } from "react-icons/fa";
+// import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = ({ scrollToSection }) => {
   const currentYear = new Date().getFullYear();
@@ -20,8 +20,8 @@ const Footer = ({ scrollToSection }) => {
               MarketingBirbal
             </h3>
             <p className="text-gray-400 text-lg mb-4">
-              Your trusted partner for comprehensive digital marketing
-              solutions, web design, and development.
+              Your trusted partner for comprehensive marketing solutions, web
+              design, and development.
             </p>
             <p className="text-gray-500 text-sm">
               Ready to start your digital transformation? Let’s collaborate and
@@ -90,15 +90,25 @@ const Footer = ({ scrollToSection }) => {
             <ul className="space-y-4">
               <li className="flex items-center text-gray-400">
                 <FaMailBulk size={20} className="mr-3" />
-                birbaldigi@gmail.com
+                <a
+                  href="connectmarketingbirbal@gmail.com"
+                  className="w-8 h-8 text-blue-500 hover:underline"
+                >
+                  connectmarketingbirbal@gmail.com
+                </a>
               </li>
               <li className="flex items-center text-gray-400">
                 <FaPhone size={20} className="mr-3" />
-                +91 7691863302
+                <a
+                  href="tel:+91 769-186-3302"
+                  className="text-blue-500 hover:underline"
+                >
+                  +91-7691863302
+                </a>
               </li>
               <li className="flex items-center text-gray-400">
                 <FaMapPin size={20} className="mr-3" />
-                Sector 10 A, Guggoa, India
+                Gurugram, Haryana, India
               </li>
             </ul>
           </div>
@@ -106,34 +116,37 @@ const Footer = ({ scrollToSection }) => {
           <div className="animate__animated animate__fadeIn animate__delay-2.5s">
             <h4 className="text-lg font-semibold mb-4">Follow Us</h4>
             <div className="flex space-x-4">
+            <a
+                href="https://www.linkedin.com/company/marketingbirbal2025/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gray-800 p-3 rounded-full hover:bg-green-600 transition-all duration-300 transform hover:scale-105"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin size={22} />
+              </a>
               <a
-                href="https://www.facebook.com/"
+                href="https://www.facebook.com/share/1FUWsbfKfR/"
                 className="bg-gray-800 p-3 rounded-full hover:bg-green-600 transition-all duration-300 transform hover:scale-105"
                 aria-label="Facebook"
               >
                 <FaFacebook size={22} />
               </a>
-              <a
+              {/* <a
                 href="https://twitter.com/"
                 className="bg-gray-800 p-3 rounded-full hover:bg-green-600 transition-all duration-300 transform hover:scale-105"
                 aria-label="Twitter"
               >
-                <FaTwitter size={22} />
-              </a>
+                <FaXTwitter size={22} />
+              </a> */}
               <a
-                href="https://www.instagram.com/"
+                href="https://www.instagram.com/marketingbirbal/"
                 className="bg-gray-800 p-3 rounded-full hover:bg-green-600 transition-all duration-300 transform hover:scale-105"
                 aria-label="Instagram"
               >
                 <FaInstagram size={22} />
               </a>
-              <a
-                href="https://github.com/"
-                className="bg-gray-800 p-3 rounded-full hover:bg-green-600 transition-all duration-300 transform hover:scale-105"
-                aria-label="Github"
-              >
-                <FaGithub size={22} />
-              </a>
+              
             </div>
           </div>
         </div>
