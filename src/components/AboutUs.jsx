@@ -1,5 +1,4 @@
 import React from "react";
-import TeamImage from "../assets/AboutUs.jpeg"; // Ensure the path is correct
 import DigitalMarketingElements from "./CreativeImageSection";
 
 const AboutUs = () => {
@@ -52,7 +51,7 @@ const AboutUs = () => {
             <div className="flex-1 mt-8 md:mt-0">
               <div className="relative w-full max-w-md md:max-w-lg lg:max-w-2xl mx-auto">
                 <img
-                  src={TeamImage}
+                  src="https://media-hosting.imagekit.io//5868933aa3fb415b/WhatsApp%20Image%202025-03-22%20at%204.46.08%20PM.jpeg?Expires=1837253732&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=qkIJSAqXRsCApxJcTjqJYN0VoQxrzaNIR3ALzY5q9slV2fcpbLiE9Hhlgcbnf7Qjt3pP0fNP5x7xirkArPTtcNwgmCvYwXZiwRWw0io-NVf-FopXEyNORRjic43QHegSwklEtYrH-kHVe9-QeRQtpGqvO-FgLVkpF-4l670o2G8G6TXUucinacLhpzWR~tCGfrtU0Bs5LfrnAPEAAhREr5HPn-f4urymJuCpcWVV7AmIl~R-5qSgQLFBq6Uicto5WrNzXyzhwcVbi77iO~jZmg05tNOrNyCPkuVBNLttgYydtt6fhDA3-fnC6GHbCxaCFPCuhV7Xxs2g9tDcF7pAQA__"
                   alt="MarketingBirbal founders crafting innovative digital strategies"
                   className="w-full h-auto rounded-lg object-cover shadow-md"
                   loading="lazy"
