@@ -1,68 +1,98 @@
 const knowledgeBase = {
-    // Greetings and Basics
-    "hi|hello|hey": "Hi there! Welcome to MarketingBirbal. I’m here to help you grow your business with our awesome marketing and tech solutions. What do you want to talk about today?",
-    "who are you|what is this": "We’re MarketingBirbal, your go-to team for digital marketing and tech solutions! We use smart ideas—like billboards, websites, and online ads—to make your business stand out and bring in more customers. What’s on your mind?",
-    "what do you do|what’s your job": "We do it all—big billboards, online ads, websites, apps, and more! Whether it’s getting your name out there with a cool sign or building a website that works like magic, we’ve got you covered. What sounds fun for your business?",
+  // Greetings and Basics
+  "greetings": "Hi there! Welcome to MarketingBirbal. I'm here to help you explore our digital marketing and tech solutions. How can we help you grow your business today? (Try asking about our services, pricing, or how we can boost your online presence.)",
+
+  "intro": "Hello! We are MarketingBirbal, your digital marketing experts. We specialize in everything from billboard advertising and online ads to website development and app creation. What would you like to know more about?",
+
+  // Real Estate and Business-Specific Questions
+  "real estate|property|houses|homes|listing": "Are you in the real estate sector? We offer tailored solutions like dynamic billboards, virtual tours on custom websites, and targeted online ads to help your properties stand out. Do you need more details on how to increase your listings’ visibility or convert leads faster?",
+
+  "more buyers|sell more|get customers|attract customers": "Increasing your customer base can be achieved with a combination of eye-catching billboards, smart online advertising (Google, social media), and an optimized website. Would you like a strategy that focuses on immediate results or long-term growth?",
+
+  "advertise|market my business|promote": "Advertising is our forte! Whether you need traditional billboards or innovative digital campaigns, we have a range of options to boost your brand’s presence. Which channel are you most interested in—outdoor, digital, or a blend of both?",
+
+  "luxury|high-end|premium": "For premium brands, we create upscale campaigns featuring elegant billboards, high-quality videos, and bespoke digital ads designed to attract discerning clients. Are you looking for a completely custom solution or something that fits within an existing framework?",
+
+  // Website and Tech Questions
+  "website|site|webpage|online presence": "A great website is key to your digital strategy! We build modern, responsive websites optimized for performance and SEO. Do you need features like property listings, online booking, or integrated chat support?",
+
+  "how much is a website|cost|price|budget website": "Website pricing varies based on your needs. A basic website might be more budget-friendly, while custom functionalities or apps will be more premium. Can you share your requirements so we can suggest an estimated range?",
+
+  "how long to build a website|website timeline|build time": "Typically, a basic website can be up and running in a few weeks, but more complex projects with custom features might take a month or longer. What is your project timeline?",
+
+  "app|mobile app|application": "Yes, we build mobile apps using React Native for a seamless experience on both Android and iOS. Apps are perfect for customer engagement and showcasing products. Would you like to discuss app functionalities or design ideas?",
+
+  // Service-Specific Questions
+  "billboard|signs|outdoor advertising": "Our billboard advertising services ensure your message is seen by thousands daily. We strategically place billboards in high-traffic areas. Interested in local, regional, or nationwide campaigns?",
+
+  "hoarding|big ad|building wrap": "Hoarding ads make a bold statement! These large-scale displays are ideal for capturing attention. Are you considering a short-term campaign or a long-term branding strategy?",
+
+  "dooh|digital out of home|LED screen": "Digital Out-of-Home (DOOH) advertising uses vibrant, moving images on LED screens to engage your audience dynamically. Would you like more details on targeting options and locations?",
+
+  "online|digital marketing|internet ads": "Our online strategies cover social media campaigns, Google Ads, SEO, and more. This holistic approach ensures your business gets noticed on every digital platform. Do you have a preferred online channel?",
+
+  "social media|facebook|instagram|twitter|linkedin": "Social media marketing is all about connecting with your audience. We create compelling posts and targeted ads across platforms like Facebook, Instagram, Twitter, and LinkedIn. Which platform are you most interested in?",
+
+  "seo|google ranking|search engine optimization": "SEO is crucial to boost your website’s visibility on Google. We implement keyword strategies and technical improvements to drive organic traffic. Would you like an audit of your current SEO performance?",
+
+  "what is seo|explain seo": "SEO is the practice of optimizing your website so that it ranks higher on search engines like Google. This means more organic traffic and potential customers without extra ad spend. Would you like more details on our SEO process?",
+
+  "ppc|ads|pay per click|online ads": "PPC campaigns allow you to pay for targeted clicks, ensuring your ads reach interested customers. It’s an effective way to drive immediate traffic. Do you have a specific budget or campaign goal in mind?",
+
+  "content|blogs|videos|storytelling": "Content marketing is about telling your brand’s story through engaging blogs, videos, and graphics. This builds trust and keeps your audience coming back. Are you interested in content creation or distribution strategies?",
+
+  "email|newsletters|direct mail": "Email marketing helps you reach your customers directly with personalized messages. Whether it's promotions, newsletters, or announcements, we can design campaigns that drive action. Would you like to see some sample templates?",
+
+  "conversion|conversion rate|sales funnel": "Conversion Rate Optimization (CRO) improves your website’s ability to turn visitors into customers. We analyze user behavior and tweak elements like forms and calls-to-action for better results. Are you interested in conversion strategies?",
+
+  "orm|reputation management|reviews": "Online Reputation Management (ORM) ensures that your business maintains a positive online presence by managing reviews and public perception. Would you like to know how we monitor and respond to feedback?",
+
+  "video|video marketing|motion graphics": "Video marketing uses engaging visuals to tell your story. From property tours to customer testimonials, videos can significantly boost engagement. Are you looking for full-scale video production or simple animations?",
+
+  "analytics|reports|tracking": "Our analytics and reporting services help you understand how your campaigns are performing. We provide clear, actionable insights to optimize your marketing efforts. Would you like to see a sample report?",
+
+  "branding|brand identity|logo design": "Developing a strong brand identity involves crafting a unique logo, consistent color scheme, and messaging that resonates with your audience. Are you looking for a complete rebranding or just a few design updates?",
+
+  "campaign|marketing campaign|strategy": "We design and manage comprehensive marketing campaigns that span multiple channels. Whether you’re launching a new product or promoting an event, our campaigns are tailored to your goals. What kind of campaign are you planning?",
+
+  "event|event marketing|launch": "Event marketing can create buzz and directly engage your target audience. From product launches to grand openings, we help design memorable events. Do you need assistance with planning, promotion, or both?",
+
+  "vendor|partnership|collaborate": "Vendor management ensures that all aspects of your marketing are coordinated seamlessly with trusted partners. We handle the logistics so you can focus on your core business. Would you like to discuss collaboration options?",
+
+  "custom|bespoke|tailored solutions": "If off-the-shelf solutions don’t cut it, we offer custom digital solutions designed specifically for your business. This can include bespoke websites, apps, or integrated marketing systems. What specific needs do you have?",
+
+  "full stack|development|coding": "Our full-stack development services cover both the front-end and back-end of your digital products. Using technologies like React and Node.js, we ensure robust and scalable solutions. Are you interested in a complete build or just enhancements?",
+
+  "ecommerce|saas|online store": "We specialize in creating secure and user-friendly e-commerce platforms and SaaS products that help your business grow online. Would you like to explore our portfolio or discuss features?",
+
+  "ui ux|design|user experience": "Great design is about more than looks—it’s about user experience. We create intuitive interfaces that keep your customers engaged and drive conversions. Do you need a full redesign or some UX improvements?",
+
+  "cloud|aws|docker|infrastructure": "Our cloud infrastructure services use tools like AWS and Docker to ensure your applications are scalable, secure, and always available. Are you looking to migrate, optimize, or build from scratch?",
+
+  "automation|crm|lead management": "Marketing automation and CRM systems streamline your processes, from lead generation to customer follow-up. This means more time focusing on growth and less on manual tasks. Would you like to integrate your current systems or start fresh?",
+
+  "ai|machine learning|image processing": "Integrating AI into your business can enhance image processing, data analysis, and customer engagement. We can create solutions tailored to your industry. Are you interested in exploring AI applications?",
+
+  // General Business and About Us
+  "grow|increase sales|success|expansion": "Growing your business is our passion. We blend creative strategies with smart technology to help you expand your reach and increase sales. What growth challenges are you facing?",
   
-    // Real Estate and Business-Specific Questions
-    "real estate|property|houses": "Running a real estate gig? We can help big time! Think billboards showing off your properties, a website with listings and virtual tours, or ads on Google and Instagram to find buyers fast. What’s your top priority—more sales or more visibility?",
-    "how do i sell more|how to get more buyers|more customers": "To get more buyers, we’d mix things up! Eye-catching billboards in busy spots, Google ads for people searching ‘homes for sale,’ and a slick website to seal the deal. We can even post your listings on social media. What’s the first thing you want to try?",
-    "how do i advertise|market my business": "Advertising’s our specialty! We can put up big hoardings or digital screens, run online ads, or optimize your website so people find you on Google. It’s all about getting the right eyes on your business. Where do you want to start?",
-    "luxury|high-end|expensive": "For luxury stuff, we go all out—fancy billboards in rich areas, stunning videos for your brand, and targeted social media ads for big spenders. Plus, a premium website to match. Ready to wow some high-end clients?",
+  "cheap|budget|cost-effective": "We understand budgets vary, which is why we offer a range of solutions from cost-effective campaigns to premium packages. Can you share more about your budget or goals?",
+
+  "vision|goal|mission": "Our mission is to revolutionize marketing with AI-powered solutions that drive real results. We believe in creative, data-driven strategies that put your business first. What are your primary goals?",
   
-    // Website and Tech Questions
-    "website|site|webpage": "Need a website? We’ll make you one that’s modern and easy to use! Think property listings, contact forms, or even a mobile app—all optimized to show up on Google. What do you want your site to do?",
-    "how much is a website|cost of site": "Website costs depend on what you want—a simple one’s cheaper, while a fancy one with apps or videos costs more. We’ll keep it affordable and awesome. Want to chat about your budget?",
-    "how long to build a website|how fast": "A basic website can be ready in a couple of weeks, but a big one with extras—like an app or cool designs—might take a month. Tell us your timeline, and we’ll make it work!",
-    "app|mobile app": "We build apps too! Whether it’s for Android or both iPhone and Android, we use React Native to make them fast and RANDuser-friendly. Perfect for showing listings or chatting with clients. Want an app for your business?",
+  "team|founder|about us": "MarketingBirbal is led by a visionary woman with a wealth of marketing experience, backed by a team of experts in digital solutions. Interested in learning more about our story?",
+
+  "why choose|what sets you apart|unique": "What sets us apart is our blend of traditional marketing with cutting-edge technology. From billboards to digital ads, we provide tailored strategies that deliver measurable results. Ready to experience the difference?",
+
+  // Contact and Next Steps
+  "contact|talk|reach out|get in touch": "We’d love to hear from you! Please visit our Contact page or provide your details, and we’ll get back to you promptly with a tailored plan. What’s your preferred method of contact?",
   
-    // Service-Specific Questions
-    "billboard|signs": "Our Billboard Advertising puts your brand on huge signs along highways or busy streets. We pick the best spots so tons of people see it—perfect for shouting out your business loud and clear. Want one near you?",
-    "hoarding|big ad": "Hoarding Advertising means giant ads on buildings or open spaces. They’re bold, impossible to miss, and great for getting attention. Where do you want your brand to stand tall?",
-    "dooh|digital out of home": "DOOH is cool digital billboards—like LED screens or video walls. They show moving ads that grab eyes in places like malls or downtown. Want to try something flashy for your business?",
-    "online|digital marketing": "Our Comprehensive Online Strategies boost you online! We handle social media, Google ads, and websites to get you noticed everywhere. What’s your online goal—more clicks or more calls?",
-    "social media|facebook|instagram|twitter": "Social Media Marketing means fun posts and ads on Facebook, Instagram, Twitter, or LinkedIn. We’ll make your brand pop and connect with the right people. Which platform’s your favorite?",
-    "seo|google|search": "SEO gets your website to the top of Google! We use smart keywords—like ‘best real estate near me’—and tweak your site so more people find you without paying for ads. Want to be #1 in search?",
-    "what is seo|explain seo": "SEO’s like a spotlight for your website. It makes Google show you when people search for what you offer. We fix your site with the right words and speed it up—more visitors, no ad costs! Cool, huh?",
-    "ppc|ads|pay per click": "PPC is quick ads on Google or social media—you pay only when someone clicks. We target the perfect crowd, like home buyers, to get you leads fast. Want instant results?",
-    "what is ppc|explain ppc": "PPC means Pay-Per-Click—online ads where you pay per click. It’s like a fast lane to customers; we show your ad to the right people, and you control the cost. Sound good?",
-    "content|blogs|videos": "Gen AI Content Marketing is about telling your story with blogs, videos, or infographics. Think ‘Top Homes in Your City’ or a video tour—keeps people hooked and trusting you. What story do you want to share?",
-    "email|emails": "Email Marketing sends personal messages—like ‘New Listings!’—to your customers. We design emails that get opened and turn readers into buyers. Ready to start emailing?",
-    "cro|conversion": "Conversion Rate Optimization (CRO) makes your website better at turning visitors into customers. We tweak buttons or forms so more people act. Want more sales from your site?",
-    "orm|reputation": "Online Reputation Management (ORM) keeps your brand looking good online. We handle reviews and feedback so people trust you. Worried about what’s out there?",
-    "video|video marketing": "Video Marketing means awesome videos that show off your business. We make them catchy and shareable—great for properties or ads. Want a video that wows?",
-    "analytics|reports": "Analytics and Reporting tracks how your ads or site are doing. We give you easy reports to see what’s working and what to tweak. Want to know your numbers?",
-    "brand|branding": "Brand Identity Development gives you a unique look—logos, colors, and messages that stick. We make sure you stand out. Ready to refresh your brand?",
-    "campaign|campaigns": "Campaign Management runs big marketing plans across channels—like ads and social media. We handle it all for max impact. Got a big idea in mind?",
-    "event|events": "Event Marketing creates fun events to boost your brand. Think open houses or launches—we make them memorable. Want to throw an event?",
-    "vendor|vendors": "Vendor Management means we work with trusted partners to get your marketing done right. No stress, just results. Need help with a big project?",
-    "custom|digital solutions": "Custom Digital Solutions build websites or apps just for you. Modern, fast, and perfect for your goals. What tech do you need?",
-    "full stack|development": "Full-Stack Development means we build everything—front and back of your site or app—using React, Node.js, and more. Want something sturdy?",
-    "ecommerce|saas|online store": "E-commerce & SaaS Platforms create online shops or tools that grow with you. Secure and easy to use—perfect for selling. Thinking of going online?",
-    "mobile app|app development": "Mobile App Development makes apps for Android or any phone with React Native. Fast, fun, and feature-packed. Want your own app?",
-    "ui ux|design": "UI/UX Design & Prototyping makes your site or app look great and feel easy. We design with users in mind—plus SEO perks! Want a pretty design?",
-    "cloud|aws|docker": "Optimized Cloud Infrastructure uses AWS and Docker for secure, scalable tech. It grows with you—no crashes! Need reliable systems?",
-    "system|database": "Scalable System & Database Architecture builds strong backends that handle tons of users. Smooth and solid—ready for big traffic?",
-    "seo website|optimization": "SEO & Website Optimization boosts your site’s speed and Google rank with advanced tricks. More visitors, better results. Want a faster site?",
-    "automation|crm": "Marketing Automation & CRM Development saves time with smart systems for leads and clients. We streamline it all. Need an easier way to manage?",
-    "image|ai|high resolution": "High-Resolution Image Processing & AI Integrations makes your visuals pop with smart tech. Think sharper pics or AI tools. Want something cutting-edge?",
+  "start|next step|begin": "Starting is easy! Let us know your needs—be it advertising, web development, or full-scale digital transformation—and we’ll guide you to the perfect solution. What would you like to tackle first?",
   
-    // General Business and About Us
-    "grow|more money|success": "To grow, we’d use billboards, online ads, a killer website, or apps—whatever fits you! We focus on more leads and sales. What’s your big goal?",
-    "cheap|low cost|budget": "We’ve got budget-friendly options! Start with social media or a simple site with SEO—big impact, small price. What’s your budget like?",
-    "vision|goal": "Our vision is to rock marketing with AI, helping businesses like yours grow huge in the digital world. What’s your dream for your business?",
-    "mission|purpose": "Our mission is to give you smart, AI-powered marketing and tech that boosts sales and makes life easy. Ready to level up?",
-    "team|who runs|founder": "We’re led by a brilliant woman who knows marketing inside out. Her ideas and our team make your business shine. Want to see her magic for you?",
-    "why you|why choose": "Choose us for AI-smart marketing, custom plans, and real results. We’re your all-in-one growth crew—billboards to apps! Ready for the difference?",
-    "different|unique": "We mix classic stuff like signs with techy stuff like AI ads—all tailored for you. No boring templates here! Sound like your vibe?",
+  "price|cost|how much": "Pricing depends on the project’s scope and your specific needs. We offer competitive rates and flexible packages. Could you share more details about your project so we can provide a ballpark figure?",
   
-    // Contact and Next Steps
-    "contact|talk|reach": "Let’s talk! Go to /contact, fill out the form, and we’ll reply fast with a plan for you. What do you want to discuss?",
-    "start|next step": "Starting’s simple—tell us what you need (ads, site, app), and we’ll suggest the best move. Or hit /contact. What’s step one for you?",
-    "price|cost|how much": "Costs vary—like a small ad’s cheap, a full app’s more—but we keep it fair. Tell us what you’re after, and we’ll give you a ballpark. What’s your budget?",
-  
-    // Fallback
-    "default": "Oops, didn’t catch that! I can help with ads, websites, apps, or anything to grow your business. What’s on your mind?"
-  };
-  
-  export default knowledgeBase;
+  // Fallback
+  "default": "I'm not sure I caught that. I can help with marketing strategies, digital ads, web development, and more. Could you rephrase your question or tell me which service interests you?"
+};
+
+export default knowledgeBase;
