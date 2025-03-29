@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 const LoginModal = ({ isVisible, onClose, onLogin }) => {
   const [isLogin, setIsLogin] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [name, setName] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState("");
 
   const handleLogin = async () => {
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
       const data = await response.json();
@@ -21,132 +20,155 @@ const LoginModal = ({ isVisible, onClose, onLogin }) => {
         onLogin(email, data.token);
         onClose();
       } else {
-        alert(data.message); // Handle login error
+        alert(data.message);
       }
     } catch (error) {
-      console.error('Login Error:', error); // Log the error details
+      console.error("Login Error:", error);
     }
   };
 
   const handleRegister = async () => {
     if (password !== confirmPassword) {
-      alert('Passwords do not match');
+      alert("Passwords do not match");
       return;
     }
     try {
       const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
       });
       const data = await response.json();
       if (response.ok) {
-        onLogin(email, data.token); // Automatically log in the user after registration
+        onLogin(email, data.token);
         onClose();
       } else {
-        alert(data.message); // Handle registration error
+        alert(data.message);
       }
     } catch (error) {
-      console.error('Register Error:', error); // Log the error details
+      console.error("Register Error:", error);
     }
   };
 
   if (!isVisible) return null;
 
   return (
-    <div className="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md">
-        <div className="flex justify-center mb-4">
-          <button
-            onClick={() => setIsLogin(true)}
-            className={`px-4 py-2 ${isLogin ? 'bg-green-600 text-white' : 'bg-white text-green-600'} rounded-tl-lg rounded-bl-lg`}
-          >
-            Login
-          </button>
-          <button
-            onClick={() => setIsLogin(false)}
-            className={`px-4 py-2 ${!isLogin ? 'bg-green-600 text-white' : 'bg-white text-green-600'} rounded-tr-lg rounded-br-lg`}
-          >
-            Register
-          </button>
-        </div>
-        {isLogin ? (
-          <>
-            <p className="text-center mb-4">Already have an account? Login to access your account.</p>
+    <motion.div
+      className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <motion.div
+        className="bg-[#FFFAFA] rounded-2xl shadow-xl p-6 w-full max-w-md border border-[#2F6B47]/20 relative overflow-hidden"
+        initial={{ scale: 0.9 }}
+        animate={{ scale: 1 }}
+        exit={{ scale: 0.9 }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-[#2F6B47]/10 to-[#D4A017]/10 opacity-50 animate-gradientShift"></div>
+        <div className="relative z-10">
+          <div className="flex justify-center mb-4">
+            <button
+              onClick={() => setIsLogin(true)}
+              className={`px-4 py-2 font-[Orbitron] ${
+                isLogin ? "bg-[#2F6B47] text-[#FFFAFA]" : "bg-white text-[#2F6B47]"
+              } rounded-full`}
+            >
+              Login
+            </button>
+            <button
+              onClick={() => setIsLogin(false)}
+              className={`px-4 py-2 font-[Orbitron] ${
+                !isLogin ? "bg-[#2F6B47] text-[#FFFAFA]" : "bg-white text-[#2F6B47]"
+              } rounded-full`}
+            >
+              Register
+            </button>
+          </div>
+          <p className="text-center mb-4 text-[#5A8033] font-[Orbitron]">
+            {isLogin ? "Access your account" : "Create a new account"}
+          </p>
+          {isLogin ? (
             <div className="space-y-4">
               <input
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 rounded-full border border-[#2F6B47]/30 focus:ring-2 focus:ring-[#D4A017] text-[#5A8033] bg-white"
               />
               <input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 rounded-full border border-[#2F6B47]/30 focus:ring-2 focus:ring-[#D4A017] text-[#5A8033] bg-white"
               />
+              <button
+                onClick={handleLogin}
+                className="w-full bg-[#2F6B47] text-[#FFFAFA] p-3 rounded-full hover:bg-[#D4A017] transition-all"
+              >
+                Login
+              </button>
             </div>
-            <button
-              onClick={handleLogin}
-              className="w-full bg-green-600 text-white p-3 rounded-lg mt-4 hover:bg-green-700 transition-all duration-200"
-            >
-              Login
-            </button>
-          </>
-        ) : (
-          <>
-            <p className="text-center mb-4">New here? Register to create an account.</p>
+          ) : (
             <div className="space-y-4">
               <input
                 type="text"
                 placeholder="Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 rounded-full border border-[#2F6B47]/30 focus:ring-2 focus:ring-[#D4A017] text-[#5A8033] bg-white"
               />
               <input
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 rounded-full border border-[#2F6B47]/30 focus:ring-2 focus:ring-[#D4A017] text-[#5A8033] bg-white"
               />
               <input
                 type="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 rounded-full border border-[#2F6B47]/30 focus:ring-2 focus:ring-[#D4A017] text-[#5A8033] bg-white"
               />
               <input
                 type="password"
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full p-3 rounded-full border border-[#2F6B47]/30 focus:ring-2 focus:ring-[#D4A017] text-[#5A8033] bg-white"
               />
+              <button
+                onClick={handleRegister}
+                className="w-full bg-[#2F6B47] text-[#FFFAFA] p-3 rounded-full hover:bg-[#D4A017] transition-all"
+              >
+                Register
+              </button>
             </div>
-            <button
-              onClick={handleRegister}
-              className="w-full bg-green-600 text-white p-3 rounded-lg mt-4 hover:bg-green-700 transition-all duration-200"
-            >
-              Register
-            </button>
-          </>
-        )}
-        <button
-          onClick={onClose}
-          className="w-full bg-red-600 text-white p-3 rounded-lg mt-4 hover:bg-red-700 transition-all duration-200"
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
+          )}
+          <button
+            onClick={onClose}
+            className="w-full bg-[#D4A017] text-[#FFFAFA] p-3 rounded-full mt-4 hover:bg-[#2F6B47] transition-all"
+          >
+            Cancel
+          </button>
+        </div>
+        <style jsx="true">{`
+          @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+          .animate-gradientShift {
+            background-size: 200% 200%;
+            animation: gradientShift 8s ease infinite;
+          }
+        `}</style>
+      </motion.div>
+    </motion.div>
   );
 };
 

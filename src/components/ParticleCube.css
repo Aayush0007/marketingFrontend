@@ -1,0 +1,7 @@
+/* ParticleCube.css */
+canvas {
+    width: 100%;
+    height: auto;
+    max-height: 600px; /* Increased to accommodate the larger cube */
+    object-fit: contain;
+  }
