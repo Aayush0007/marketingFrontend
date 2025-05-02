@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import HeroImg from "../assets/HeroSection.png";
+import HeroImg from "../assets/freepik_br_8d344293-4862-403e-87d4-08642403774a.png";
 
 const HeroSection = ({ scrollToSection }) => {
   const canvasRef = useRef(null);

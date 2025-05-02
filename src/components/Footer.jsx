@@ -99,8 +99,9 @@ const Footer = ({ scrollToSection }) => {
               </li>
               <li className="flex items-center animate-fadeInUp delay-900">
                 <FaMapPin size={20} className="mr-3 text-[#2F6B47]" />
-                <span>Gurugram, Haryana, India</span>
+                <span>A-295, gali no. 3, Vaishali Nagar, Jaipur, Rajasthan, 302021 | Gurugram, Haryana, India </span>
               </li>
+              
             </ul>
           </div>
 
