@@ -7,10 +7,11 @@
   <meta name="format-detection" content="telephone=no, email=no, address=no" />
   <meta name="mobile-web-app-capable" content="yes" />
 
-  
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="%PUBLIC_URL%/favicon.ico" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
+  <!-- Favicon and App Icons (Optimized for All Devices) -->
+  <link rel="icon" type="image/webp" href="https://media-hosting.imagekit.io/5868933aa3fb415b/favicon.webp?tr=w-32,h-32" sizes="32x32" />
+  <link rel="apple-touch-icon" href="https://media-hosting.imagekit.io/5868933aa3fb415b/apple-touch-icon.webp?tr=w-180,h-180" />
+  <link rel="icon" type="image/webp" href="https://media-hosting.imagekit.io/5868933aa3fb415b/favicon-16x16.webp?tr=w-16,h-16" sizes="16x16" />
+  <link rel="manifest" href="/site.webmanifest" crossorigin="use-credentials" />
 
   <!-- Preload Critical Assets for Performance -->
   <link rel="preload" href="https://media-hosting.imagekit.io/5868933aa3fb415b/favicon.webp?tr=w-32,h-32" as="image" type="image/webp" crossorigin="anonymous" />
@@ -268,9 +269,11 @@
   <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
   <link rel="dns-prefetch" href="https://media-hosting.imagekit.io" />
   <link rel="preconnect" href="https://media-hosting.imagekit.io" crossorigin />
+  <link rel="dns-prefetch" href="https://script.google.com" />
+  <link rel="preconnect" href="https://script.google.com" crossorigin />
 
   <!-- Security Headers -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://*.googleapis.com https://*.gstatic.com https://media-hosting.imagekit.io; script-src 'self' https://www.googletagmanager.com; style-src 'self' https://*.googleapis.com 'unsafe-inline'; font-src 'self' https://*.gstatic.com; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'none';" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://*.googleapis.com https://*.gstatic.com https://media-hosting.imagekit.io; script-src 'self' https://www.googletagmanager.com; style-src 'self' https://*.googleapis.com 'unsafe-inline'; font-src 'self' https://*.gstatic.com; connect-src 'self' https://www.google-analytics.com https://script.google.com https://script.googleusercontent.com; frame-ancestors 'none';" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
   <meta http-equiv="X-Frame-Options" content="DENY" />
