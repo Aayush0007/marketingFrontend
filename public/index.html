@@ -1,117 +1,280 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en-IN" dir="ltr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no, user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="format-detection" content="telephone=no, email=no, address=no" />
+  <meta name="mobile-web-app-capable" content="yes" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="%PUBLIC_URL%/favicon.ico" />
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
+  
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap"
-    rel="stylesheet">
+  <!-- Preload Critical Assets for Performance -->
+  <link rel="preload" href="https://media-hosting.imagekit.io/5868933aa3fb415b/favicon.webp?tr=w-32,h-32" as="image" type="image/webp" crossorigin="anonymous" />
+  <link rel="preload" href="https://media-hosting.imagekit.io/5868933aa3fb415b/logo.webp?tr=w-600,h-60" as="image" type="image/webp" crossorigin="anonymous" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" as="style" onload="this.rel='stylesheet'" crossorigin="anonymous" />
+
+  <!-- Google Fonts (Optimized with Preconnect) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet" media="all" />
 
   <!-- Theme Color for Mobile Browsers -->
-  <meta name="theme-color" content="#34D399" />
+  <meta name="theme-color" content="#34D399" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1F4A44" media="(prefers-color-scheme: dark)" />
 
-  <!-- Core Meta Tags (Optimized for 2025 Trends) -->
-  <title>MarketingBirbal | Best AI-Powered Digital Marketing Agency 2025</title>
-  <meta name="description"
-    content="Grow your brand with MarketingBirbal, the best AI-powered digital marketing agency in India. Expert SEO, PPC, video marketing, and voice search optimization for 2025." />
-  <meta name="keywords"
-    content="AI-powered digital marketing, digital marketing agency India, SEO services 2025, voice search optimization, video marketing strategies, e-commerce SEO, sustainable marketing, MarketingBirbal, local SEO India, PPC advertising, social media marketing" />
+  <!-- Core Meta Tags (Optimized for 2025 Trends and Keywords) -->
+  <title>MarketingBirbal | Best AI-Powered Digital Marketing Agency India 2025</title>
+  <meta name="description" content="Elevate your brand with MarketingBirbal, the best AI-powered digital marketing agency in India for 2025. Expert SEO services, voice search optimization, video marketing, e-commerce SEO, and sustainable marketing solutions." />
+  <meta name="keywords" content="AI-powered digital marketing agency, best digital marketing services India 2025, SEO services 2025, voice search optimization 2025, video marketing strategies India, e-commerce SEO services, sustainable digital marketing solutions, local SEO India 2025, PPC advertising agency, conversational AI marketing, zero-click SEO strategies, AI-driven content marketing, MarketingBirbal" />
   <meta name="author" content="MarketingBirbal Team" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://www.marketingbirbal.com" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <meta name="googlebot" content="index, follow, snippet, translate" />
+  <link rel="canonical" href="https://www.marketingbirbal.com/" />
 
   <!-- Open Graph / Social Media Metadata (Optimized for Sharing) -->
-  <meta property="og:title" content="MarketingBirbal | Best AI-Powered Digital Marketing Agency 2025" />
-  <meta property="og:description"
-    content="Boost your brand 10X with MarketingBirbal’s AI-driven digital marketing services: SEO, PPC, video marketing, and voice search optimization for 2025." />
-  <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
-  <meta property="og:url" content="https://www.marketingbirbal.com" />
+  <meta property="og:title" content="MarketingBirbal | Best AI-Powered Digital Marketing Agency India 2025" />
+  <meta property="og:description" content="Elevate your brand 10X with MarketingBirbal’s AI-driven digital marketing services in India: SEO, voice search optimization, video marketing, and sustainable solutions for 2025." />
+  <meta property="og:image" content="https://media-hosting.imagekit.io/5868933aa3fb415b/og-image.webp?tr=w-1200,h-630" />
+  <meta property="og:image:alt" content="MarketingBirbal AI-powered digital marketing services for 2025" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/webp" />
+  <meta property="og:image:secure_url" content="https://media-hosting.imagekit.io/5868933aa3fb415b/og-image.webp?tr=w-1200,h-630" />
+  <meta property="og:url" content="https://www.marketingbirbal.com/" />
   <meta property="og:type" content="website" />
+  <meta property="og:locale" content="en_IN" />
+  <meta property="og:site_name" content="MarketingBirbal" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="MarketingBirbal | Best Digital Marketing Agency 2025" />
-  <meta name="twitter:description"
-    content="Grow your brand with AI-driven marketing solutions: SEO, PPC, video marketing, and more. Contact MarketingBirbal today!" />
-  <meta name="twitter:image" content="%PUBLIC_URL%/og-image.png" />
+  <meta name="twitter:site" content="@marketingbirbal" />
+  <meta name="twitter:creator" content="@marketingbirbal" />
+  <meta name="twitter:title" content="MarketingBirbal | Best Digital Marketing Agency India 2025" />
+  <meta name="twitter:description" content="Elevate your brand with AI-driven marketing solutions: SEO, voice search optimization, video marketing, and more. Contact MarketingBirbal today!" />
+  <meta name="twitter:image" content="https://media-hosting.imagekit.io/5868933aa3fb415b/og-image.webp?tr=w-1200,h-630" />
+  <meta name="twitter:image:alt" content="MarketingBirbal AI-powered digital marketing services for 2025" />
 
-  <!-- Additional SEO Meta Tags -->
-  <meta name="geo.region" content="IN" />
-  <meta name="geo.placename" content="India" />
-  <meta name="geo.position" content="20.5937;78.9629" /> <!-- Approximate coordinates for India -->
-  <meta name="ICBM" content="20.5937, 78.9629" /> <!-- For local SEO -->
+  <!-- Local SEO Meta Tags -->
+  <meta name="geo.region" content="IN-MH" />
+  <meta name="geo.placename" content="Mumbai, Maharashtra, India" />
+  <meta name="geo.position" content="19.0760;72.8777" />
+  <meta name="ICBM" content="19.0760, 72.8777" />
 
-  <!-- Schema Markup for Organization (Enhanced with Trending Keywords) -->
+  <!-- Schema Markup: Organization (Enhanced for E-A-T and 2025 Trends) -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "MarketingBirbal",
-      "url": "https://www.marketingbirbal.com",
-      "logo": "%PUBLIC_URL%/logo.png",
-      "description": "MarketingBirbal is the best AI-powered digital marketing agency in India for 2025, offering innovative solutions like SEO services, voice search optimization, video marketing strategies, e-commerce SEO, and sustainable marketing to drive brand growth.",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+91-76918-63302",
-        "contactType": "Customer Service",
-        "email": "connectmarketingbirbal@gmail.com",
-        "areaServed": "IN",
-        "availableLanguage": "English"
-      },
+      "alternateName": "MarketingBirbal Digital Marketing Agency",
+      "url": "https://www.marketingbirbal.com/",
+      "logo": "https://media-hosting.imagekit.io/5868933aa3fb415b/logo.webp?tr=w-600,h-60",
+      "image": "https://media-hosting.imagekit.io/5868933aa3fb415b/og-image.webp?tr=w-1200,h-630",
+      "description": "MarketingBirbal is the best AI-powered digital marketing agency in India for 2025, specializing in SEO services, voice search optimization, video marketing strategies, e-commerce SEO, and sustainable digital marketing solutions to drive brand growth.",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+91-76918-63302",
+          "contactType": "Customer Service",
+          "email": "connectmarketingbirbal@gmail.com",
+          "areaServed": "IN",
+          "availableLanguage": ["English", "Hindi"],
+          "contactOption": "TollFree",
+          "hoursAvailable": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          }
+        }
+      ],
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "IN",
-        "addressLocality": "India",
-        "postalCode": "400001", // Replace with your actual postal code
-        "streetAddress": "123 Marketing Street" // Replace with your actual address
+        "addressLocality": "Mumbai",
+        "addressRegion": "Maharashtra",
+        "postalCode": "400001",
+        "streetAddress": "123 Marketing Street"
       },
       "sameAs": [
         "https://www.facebook.com/marketingbirbal",
         "https://twitter.com/marketingbirbal",
         "https://www.linkedin.com/company/marketingbirbal",
         "https://www.instagram.com/marketingbirbal",
-        "https://wa.me/917691863302"
+        "https://wa.me/917691863302",
+        "https://www.youtube.com/@marketingbirbal",
+        "https://www.pinterest.com/marketingbirbal"
       ],
+      "founder": {
+        "@type": "Person",
+        "name": "MarketingBirbal Team",
+        "jobTitle": "Founder",
+        "url": "https://www.marketingbirbal.com/about-us"
+      },
+      "numberOfEmployees": "50",
+      "foundingDate": "2020-01-01",
       "keywords": [
-        "AI-powered digital marketing",
-        "digital marketing agency India",
+        "AI-powered digital marketing agency",
+        "best digital marketing services India 2025",
         "SEO services 2025",
-        "voice search optimization",
-        "video marketing strategies",
-        "e-commerce SEO",
-        "sustainable marketing"
+        "voice search optimization 2025",
+        "video marketing strategies India",
+        "e-commerce SEO services",
+        "sustainable digital marketing solutions",
+        "local SEO India 2025",
+        "PPC advertising agency",
+        "conversational AI marketing",
+        "zero-click SEO strategies",
+        "AI-driven content marketing"
+      ],
+      "slogan": "Elevate Your Brand with AI-Driven Marketing",
+      "brand": {
+        "@type": "Brand",
+        "name": "MarketingBirbal",
+        "logo": "https://media-hosting.imagekit.io/5868933aa3fb415b/logo.webp?tr=w-600,h-60"
+      }
+    }
+  </script>
+
+  <!-- Schema Markup: LocalBusiness (Enhanced for Local SEO) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "MarketingBirbal",
+      "url": "https://www.marketingbirbal.com/",
+      "logo": "https://media-hosting.imagekit.io/5868933aa3fb415b/logo.webp?tr=w-600,h-60",
+      "image": "https://media-hosting.imagekit.io/5868933aa3fb415b/og-image.webp?tr=w-1200,h-630",
+      "description": "MarketingBirbal offers AI-powered digital marketing services in Mumbai, India, specializing in SEO, voice search optimization, and video marketing for 2025.",
+      "telephone": "+91-76918-63302",
+      "email": "connectmarketingbirbal@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "IN",
+        "addressLocality": "Mumbai",
+        "addressRegion": "Maharashtra",
+        "postalCode": "400001",
+        "streetAddress": "123 Marketing Street"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 19.0760,
+        "longitude": 72.8777
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        }
+      ],
+      "priceRange": "$$",
+      "sameAs": [
+        "https://www.facebook.com/marketingbirbal",
+        "https://twitter.com/marketingbirbal",
+        "https://www.linkedin.com/company/marketingbirbal",
+        "https://www.instagram.com/marketingbirbal",
+        "https://wa.me/917691863302"
       ]
     }
   </script>
 
-  <!-- Schema Markup for WebSite (Enhances Search Features) -->
+  <!-- Schema Markup: WebSite (Enhanced for Search Features) -->
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "MarketingBirbal",
-      "url": "https://www.marketingbirbal.com",
+      "url": "https://www.marketingbirbal.com/",
       "potentialAction": {
         "@type": "SearchAction",
         "target": "https://www.marketingbirbal.com/search?q={search_term_string}",
         "query-input": "required name=search_term_string"
+      },
+      "inLanguage": "en-IN",
+      "publisher": {
+        "@type": "Organization",
+        "name": "MarketingBirbal",
+        "url": "https://www.marketingbirbal.com/"
       }
     }
   </script>
 
-  <!-- Preload Key Assets -->
-  <link rel="preload" href="%PUBLIC_URL%/favicon.png" as="image" />
-  <link rel="preload" href="%PUBLIC_URL%/logo.png" as="image" />
+  <!-- Schema Markup: FAQPage (Optimized for Voice Search and Featured Snippets) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is AI-powered digital marketing?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI-powered digital marketing uses artificial intelligence to optimize campaigns, analyze data, and enhance user experiences. At MarketingBirbal, we leverage AI for SEO services, PPC advertising, video marketing strategies, and voice search optimization to help businesses in India succeed in 2025."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I optimize my website for voice search in 2025?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To optimize for voice search in 2025, use conversational keywords, implement structured data, and focus on local SEO. MarketingBirbal specializes in voice search strategies, ensuring your business ranks for queries like 'digital marketing agency near me' in India."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why should I choose MarketingBirbal for digital marketing in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "MarketingBirbal is the best AI-powered digital marketing agency in India for 2025. We offer expert SEO services, sustainable marketing solutions, e-commerce SEO, and video marketing strategies to help your brand grow 10X."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the top SEO trends for 2025 in India?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Top SEO trends for 2025 in India include voice search optimization, AI-driven content marketing, video SEO, and zero-click search strategies. MarketingBirbal helps businesses stay ahead with these cutting-edge techniques."
+          }
+        }
+      ]
+    }
+  </script>
 
-  <!-- Performance Optimization -->
+  <!-- Schema Markup: BreadcrumbList (Enhanced for Navigation) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.marketingbirbal.com/"
+        }
+      ]
+    }
+  </script>
+
+  <!-- Performance Optimization (DNS Prefetch and Preconnect) -->
   <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
   <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+  <link rel="dns-prefetch" href="https://media-hosting.imagekit.io" />
+  <link rel="preconnect" href="https://media-hosting.imagekit.io" crossorigin />
+
+  <!-- Security Headers -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https://*.googleapis.com https://*.gstatic.com https://media-hosting.imagekit.io; script-src 'self' https://www.googletagmanager.com; style-src 'self' https://*.googleapis.com 'unsafe-inline'; font-src 'self' https://*.gstatic.com; connect-src 'self' https://www.google-analytics.com; frame-ancestors 'none';" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="X-Frame-Options" content="DENY" />
+  <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains; preload" />
 
   <!-- Google Analytics (GA4) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -119,13 +282,24 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
+    gtag('config', 'G-XXXXXXXXXX', {
+      'page_title': 'MarketingBirbal | Best AI-Powered Digital Marketing Agency India 2025',
+      'page_path': '/'
+    });
   </script>
+
+  <!-- Accessibility Meta Tags -->
+  <meta name="application-name" content="MarketingBirbal" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="description" content="MarketingBirbal offers AI-powered digital marketing services in India for 2025." lang="en-IN" />
 </head>
-
 <body>
-  <noscript>You need to enable JavaScript to run this app. Please enable it for the best experience.</noscript>
-  <div id="root"></div>
+  <noscript>
+    <div role="alert" aria-live="assertive">
+      You need to enable JavaScript to run this app. Please enable it for the best experience with MarketingBirbal’s AI-powered digital marketing services in India for 2025.
+    </div>
+  </noscript>
+  <div id="root" role="main" aria-label="Main content of MarketingBirbal website"></div>
 </body>
-
 </html>

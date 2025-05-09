@@ -56,7 +56,18 @@ export const blogs = [
         "Backend development is the backbone of any web application. It handles everything behind the scenes, from database management to server-side logic, ensuring your site runs smoothly and securely. A robust backend architecture is vital for scalability, allowing your site to handle growing traffic and demands. Security is also a top priority, as you’ll need to protect sensitive user data. By implementing encryption, strong authentication methods, and regular security updates, you can ensure your backend remains secure. The backend also plays a major role in performance, with efficient database queries and load balancing techniques ensuring a seamless user experience even during traffic spikes. With a solid backend, your web application will be ready for anything.",
       imageUrl: "https://media-hosting.imagekit.io//f5851d2665b14824/freepik__the-style-is-candid-image-photography-with-natural__18469.jpeg?Expires=1837249021&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=dxJxnMPwjPAG4UqTi~t2pnxqgySUzY83ieu142-0dtMaQnKAeqNmnkU9P0~DLDne826E0v~WaHfygm0ILONz6yPoUGyoTcw-~S7jfwk8n0yLsKh1xVBvMuzoIhONOzXlZpo1QNjQUfsI4rbAPCeLNOQAFhydjBQwI~NYZyreR9LajYelSvunA0u5DZQHELtQPZ~W8J7i0QFX9yRIuJhZjIOxlXvBC76KlNnZ~d-p6304XSS5fv3~DgsU4z9W1~MSEJwRw7230btSuMcSRi7Uvb0Ku1p6aiPbiAoc7WO9DHkyExWdgojQ5siAtTGd7p6rYHjeWAf2ov1oItOQbp5vTw__",
     },
+    {
+      id: 7,
+      title: "The Rise of AI-Driven Hyperlocal Marketing in India: Strategies to Dominate Local Searches in 2025",
+      summary:
+        "Discover how AI-driven hyperlocal marketing is transforming the way businesses in India connect with local customers in 2025. Learn actionable strategies to dominate local searches, from AI-powered ad targeting to optimizing for 'near me' queries.",
+      content:
+        "Hyperlocal marketing is becoming a game-changer for businesses in India, especially in 2025, as mobile searches with local intent continue to rise. With 46% of Google searches having local intent and 81% mobile penetration in India, targeting local audiences has never been more critical. AI takes hyperlocal marketing to the next level by enabling precision targeting through geofencing, personalized ads, and local SEO optimization. At MarketingBirbal, we use AI to help businesses dominate local searches by optimizing Google My Business listings, creating multilingual content for diverse Indian audiences, and setting up geofenced ad campaigns. For example, a Mumbai-based retailer we worked with saw a 30% increase in foot traffic during Diwali 2025 by leveraging AI-driven hyperlocal strategies. To succeed, businesses should focus on voice search optimization for queries like 'best digital marketing agency near me,' use AI tools like Google Ads for geofencing, and tap into platforms like ONDC for hyperlocal e-commerce. Ready to dominate your local market? Contact MarketingBirbal to implement AI-driven hyperlocal marketing strategies tailored for India in 2025.",
+      imageUrl:
+        "https://media-hosting.imagekit.io/e9693d97014c4f39/freepik__a-modern-digital-marketing-concept-image-illustrat__66436.png?Expires=1841383851&Key-Pair-Id=K2ZIVPTIP2VGHC&Signature=YTaZ2OgnaVGIdi08jQyb3uUNmnV4hjpmqApabmloGxJlnjEVoJVmvk0IvAN61riDxlHlT-Ag6U1py3UzARpGeW4kR1u4J6tsh2H545v7mwzPzHRp8-zddMqpqHQ9sqJ~L8tabPc~4FAMX0kPZ0IFW0wd6pNneGEAaXB6-iEuAUTFqv~qQqanX6XbYhMkLO7Jmy0-CucbGZUQrzQAJnySskbiCj2RN6UCpxo0VRpmr5bIVKxJoAFPO6-mgAsF5GL1xkVIakbeqDn5bpdXdIj5IYZHXG7hNjnGUFMIuu6eVUloU-s4umnVxCeEOqwoPBjQbvJhCgTpJqMUZeEBZegxFw__",
+    },
   ];
+
   
   export const testimonials = [
     { name: "John Doe", comment: "Amazing insights!", position: "Marketing Manager" },

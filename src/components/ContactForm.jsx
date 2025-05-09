@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { Send } from "lucide-react";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -10,6 +9,7 @@ const ContactForm = () => {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
   const [status, setStatus] = useState("");
   const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const maxWords = 100;
   const navigate = useNavigate();
 
@@ -22,8 +22,8 @@ const ContactForm = () => {
   };
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  const getWordCount = (message) => message.trim().split(/\s+/).length;
-  const validatePhone = (phone) => /^[0-9]{10}$/.test(phone);
+  const validatePhone = (phone) => /^\+?\d{10,15}$/.test(phone);
+  const getWordCount = (message) => message.trim().split(/\s+/).filter(word => word.length > 0).length;
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -33,11 +33,11 @@ const ContactForm = () => {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = "Name is required";
-    if (!validateEmail(formData.email)) newErrors.email = "Invalid email address";
-    if (!validatePhone(formData.phone)) newErrors.phone = "Phone number must be 10 digits";
-    if (!formData.subject.trim()) newErrors.subject = "Subject is required";
-    if (!formData.phone.trim()) newErrors.phone = "Phone number is required";
+    if (!formData.name.trim()) newErrors.name = "Please enter your name.";
+    if (!validateEmail(formData.email)) newErrors.email = "Please enter a valid email (e.g., user@example.com).";
+    if (!validatePhone(formData.phone)) newErrors.phone = "Please enter a valid phone number (10-15 digits, e.g., 9351044351 or +919351044351).";
+    if (!formData.subject.trim()) newErrors.subject = "Please enter a subject.";
+    if (!formData.message.trim()) newErrors.message = "Please enter your message.";
     if (getWordCount(formData.message) > maxWords) newErrors.message = `Max ${maxWords} words allowed`;
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -45,28 +45,63 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    setIsSubmitting(true);
+    setStatus("");
+
+    if (!validateForm()) {
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Convert timestamp to IST (Asia/Kolkata)
+    const now = new Date();
+    const istTimestamp = now
+      .toLocaleString("en-IN", {
+        timeZone: "Asia/Kolkata",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      })
+      .replace(
+        /(\d{2})\/(\d{2})\/(\d{4}), (\d{2}):(\d{2}):(\d{2})/,
+        "$3-$2-$1 $4:$5:$6"
+      );
+
+    const payload = {
+      ...formData,
+      timestamp: istTimestamp,
+      formType: "serviceContact",
+    };
+    console.log("Sending payload from Service Contact:", payload); // Add this log
 
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/service-contact`,
-        formData,
-        { headers: { "Content-Type": "application/json" } }
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbzdHawYeh6G28PCD0hPXdiRSJYcTeZRLZ2OLadY6UIBWpxLeFaQwDG8uNO2ATceRJiv/exec", // Replace with the new Web app URL
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+          mode: "no-cors",
+        }
       );
-      if (response.data.success) {
-        setStatus("Message sent successfully! 🎉");
-        setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-        setTimeout(() => setStatus(""), 3000);
-      }
+
+      setStatus("Message sent successfully!");
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
     } catch (err) {
-      const errorMessage = err.response?.data?.message || "Failed to send message. Please try again.";
-      setStatus(`Error: ${errorMessage}`);
-      console.error("Submission error:", err);
+      setStatus("Failed to send message.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const wordCount = getWordCount(formData.message);
-  const isFormValid = wordCount <= maxWords;
+  const isFormValid = wordCount <= maxWords && formData.name.trim() && validateEmail(formData.email) && validatePhone(formData.phone) && formData.subject.trim() && formData.message.trim();
 
   return (
     <>
@@ -98,7 +133,7 @@ const ContactForm = () => {
             <div>
               <label className="block text-[#2F6B47] text-sm font-bold mb-2">Your Name</label>
               <motion.input
-                className={`w-full p-4 border border-[#2F6B47] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A017] ${errors.name ? "border-[#D4A017]" : ""}`}
+                className={`w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A017] ${errors.name ? "border-[#D4A017]" : "border-[#2F6B47]"}`}
                 type="text"
                 id="name"
                 value={formData.name}
@@ -112,7 +147,7 @@ const ContactForm = () => {
             <div>
               <label className="block text-[#2F6B47] text-sm font-bold mb-2">Your Email</label>
               <motion.input
-                className={`w-full p-4 border border-[#2F6B47] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A017] ${errors.email ? "border-[#D4A017]" : ""}`}
+                className={`w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A017] ${errors.email ? "border-[#D4A017]" : "border-[#2F6B47]"}`}
                 type="email"
                 id="email"
                 value={formData.email}
@@ -126,7 +161,7 @@ const ContactForm = () => {
             <div>
               <label className="block text-[#2F6B47] text-sm font-bold mb-2">Phone Number</label>
               <motion.input
-                className={`w-full p-4 border border-[#2F6B47] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A017] ${errors.phone ? "border-[#D4A017]" : ""}`}
+                className={`w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A017] ${errors.phone ? "border-[#D4A017]" : "border-[#2F6B47]"}`}
                 type="tel"
                 id="phone"
                 value={formData.phone}
@@ -141,7 +176,7 @@ const ContactForm = () => {
             <div>
               <label className="block text-[#2F6B47] text-sm font-bold mb-2">Subject</label>
               <motion.input
-                className={`w-full p-4 border border-[#2F6B47] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A017] ${errors.subject ? "border-[#D4A017]" : ""}`}
+                className={`w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A017] ${errors.subject ? "border-[#D4A017]" : "border-[#2F6B47]"}`}
                 type="text"
                 id="subject"
                 value={formData.subject}
@@ -155,7 +190,7 @@ const ContactForm = () => {
             <div className="relative">
               <label className="block text-[#2F6B47] text-sm font-bold mb-2">Message</label>
               <motion.textarea
-                className={`w-full p-4 border border-[#2F6B47] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A017] ${errors.message ? "border-[#D4A017]" : ""}`}
+                className={`w-full p-4 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#D4A017] ${errors.message ? "border-[#D4A017]" : "border-[#2F6B47]"}`}
                 id="message"
                 rows="5"
                 value={formData.message}
@@ -171,20 +206,20 @@ const ContactForm = () => {
             </div>
 
             <motion.button
-              className={`w-full py-3 rounded-lg font-medium relative overflow-hidden transition-all duration-300 ${isFormValid ? "bg-[#2F6B47] text-white group" : "bg-[#F0EFE7] cursor-not-allowed text-[#5A8033]"}`}
+              className={`w-full py-3 rounded-lg font-medium relative overflow-hidden transition-all duration-300 ${isFormValid && !isSubmitting ? "bg-[#2F6B47] text-white group" : "bg-[#F0EFE7] cursor-not-allowed text-[#5A8033]"}`}
               type="submit"
-              whileTap={{ scale: isFormValid ? 0.95 : 1 }}
-              disabled={!isFormValid}
+              whileTap={{ scale: isFormValid && !isSubmitting ? 0.95 : 1 }}
+              disabled={!isFormValid || isSubmitting}
             >
               <div className="flex items-center justify-center gap-2 relative z-10">
                 <Send className="w-5 h-5" />
-                <span>Send Message</span>
+                <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
               </div>
-              {isFormValid && <span className="absolute inset-0 bg-[#D4A017] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-lg"></span>}
+              {(isFormValid && !isSubmitting) && <span className="absolute inset-0 bg-[#D4A017] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-lg"></span>}
             </motion.button>
 
             {status && (
-              <p className={`text-center mt-4 text-sm animate-fadeInUp ${status.includes("🎉") ? "text-[#5A8033]" : "text-[#D4A017]"}`}>
+              <p className={`text-center mt-4 text-sm animate-fadeInUp ${status.includes("successfully") ? "text-[#5A8033]" : "text-[#D4A017]"}`}>
                 {status}
               </p>
             )}
@@ -210,33 +245,35 @@ const ContactForm = () => {
         </div>
       </motion.section>
       <Footer scrollToSection={scrollToSection} />
-      <style jsx="true">{`
-        @keyframes pulseSlow {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.1); }
-          100% { transform: scale(1); }
-        }
-        @keyframes gradientText {
-          0% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-          100% { background-position: 0% 50%; }
-        }
-        @keyframes expandLine {
-          0% { width: 0; }
-          100% { width: 3rem; }
-        }
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-gradientText {
-          background-size: 200% 200%;
-          animation: gradientText 6s ease infinite;
-        }
-        .animate-fadeInUp {
-          animation: fadeInUp 0.8s ease-out forwards;
-        }
-      `}</style>
+      <style>
+        {`
+          @keyframes pulseSlow {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+          }
+          @keyframes gradientText {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
+          @keyframes expandLine {
+            0% { width: 0; }
+            100% { width: 3rem; }
+          }
+          @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .animate-gradientText {
+            background-size: 200% 200%;
+            animation: gradientText 6s ease infinite;
+          }
+          .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+          }
+        `}
+      </style>
     </>
   );
 };

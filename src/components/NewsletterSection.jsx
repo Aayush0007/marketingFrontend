@@ -3,14 +3,66 @@ import React, { useState } from "react";
 const NewsletterSection = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubscribe = (e) => {
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const handleSubscribe = async (e) => {
     e.preventDefault();
-    if (email) {
+    setIsSubmitting(true);
+    setMessage("");
+
+    // Validate email
+    if (!validateEmail(email)) {
+      setMessage("Please enter a valid email address (e.g., user@example.com).");
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Convert timestamp to IST (Asia/Kolkata)
+    const now = new Date();
+    const istTimestamp = now
+      .toLocaleString("en-IN", {
+        timeZone: "Asia/Kolkata",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+        hour12: false,
+      })
+      .replace(
+        /(\d{2})\/(\d{2})\/(\d{4}), (\d{2}):(\d{2}):(\d{2})/,
+        "$3-$2-$1 $4:$5:$6"
+      );
+
+    const payload = {
+      email: email,
+      timestamp: istTimestamp,
+      formType: "newsletter",
+    };
+    console.log("Sending payload from Newsletter:", payload);
+
+    try {
+      await fetch(
+        "https://script.google.com/macros/s/AKfycbzdHawYeh6G28PCD0hPXdiRSJYcTeZRLZ2OLadY6UIBWpxLeFaQwDG8uNO2ATceRJiv/exec",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+          mode: "no-cors",
+        }
+      );
+
       setMessage("Thank you for subscribing!");
       setEmail("");
-    } else {
-      setMessage("Please enter a valid email address.");
+    } catch (error) {
+      setMessage("Failed to subscribe. Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -37,17 +89,27 @@ const NewsletterSection = () => {
             className="w-full md:w-1/2 p-3 rounded-lg border border-[#2F6B47] focus:ring-2 focus:ring-[#D4A017] focus:outline-none text-[#5A8033] bg-white animate-fadeInUp delay-200"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
           <button
             type="submit"
-            className="px-6 py-3 bg-[#2F6B47] text-white font-semibold rounded-lg relative overflow-hidden group animate-fadeInUp delay-300"
+            disabled={isSubmitting}
+            className={`px-6 py-3 bg-[#2F6B47] text-white font-semibold rounded-lg relative overflow-hidden group animate-fadeInUp delay-300 ${
+              isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
-            <span className="relative z-10">Subscribe</span>
+            <span className="relative z-10">
+              {isSubmitting ? "Subscribing..." : "Subscribe"}
+            </span>
             <span className="absolute inset-0 bg-[#D4A017] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left rounded-lg"></span>
           </button>
         </form>
         {message && (
-          <p className="text-[#5A8033] font-semibold mt-4 animate-fadeInUp delay-400">
+          <p
+            className={`text-lg mt-4 animate-fadeInUp delay-400 ${
+              message.includes("Thank you") ? "text-[#5A8033]" : "text-red-600"
+            }`}
+          >
             {message}
           </p>
         )}

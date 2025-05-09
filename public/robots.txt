@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /private/
+Crawl-delay: 5
 Sitemap: https://www.marketingbirbal.com/sitemap.xml
+Host: https://www.marketingbirbal.com
