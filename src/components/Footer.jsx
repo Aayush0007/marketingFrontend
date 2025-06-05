@@ -85,7 +85,7 @@ const Footer = ({ scrollToSection }) => {
                   href="mailto:connectmarketingbirbal@gmail.com"
                   className="text-[#5A8033] hover:text-[#D4A017] transition-colors duration-300"
                 >
-                  connectmarketingbirbal@gmail.com
+                  connect@marketingbirbal.com
                 </a>
               </li>
               <li className="flex items-center animate-fadeInUp delay-800">
@@ -94,7 +94,7 @@ const Footer = ({ scrollToSection }) => {
                   href="tel:+917691863302"
                   className="text-[#5A8033] hover:text-[#D4A017] transition-colors duration-300"
                 >
-                  +91-92115 22011
+                  +91-9211 560084
                 </a>
               </li>
               <li className="flex items-center animate-fadeInUp delay-900">

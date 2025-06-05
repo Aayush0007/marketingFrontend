@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
-import Logo from "../assets/Logo.png";
+import Logo from "../assets/Marketing-Birbal-Logo.png";
 import { motion } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 
