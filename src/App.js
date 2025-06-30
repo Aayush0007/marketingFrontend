@@ -11,6 +11,7 @@ import ServiceDetail from "./components/ServiceDetail";
 import ContactForm from "./components/ContactForm";
 import BlogDetail from "./components/BlogDetail";
 import TermsAndConditions from "./components/TermsAndConditions";
+import PrivacyPolicy from "./components/PrivacyPolicy"
 import AdminDashboard from "./components/AdminDashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AdminRoute from "./components/AdminRoute";
@@ -331,6 +332,10 @@ function App() {
               <Route
                 path="/terms-and-conditions"
                 element={<TermsAndConditions />}
+              />
+              <Route
+                path="/privacyPolicy"
+                element={<PrivacyPolicy />}
               />
               <Route
                 path="/admin"

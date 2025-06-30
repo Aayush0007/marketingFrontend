@@ -69,6 +69,16 @@ const Footer = ({ scrollToSection }) => {
                   Terms and Conditions
                 </a>
               </li>
+              <li className="animate-fadeInUp" style={{ animationDelay: "1s" }}>
+                <a
+                  href="/PrivacyPolicy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#5A8033] hover:text-[#D4A017] transition-colors duration-300"
+                >
+                  Privacy & Policy
+                </a>
+              </li>
             </ul>
           </div>
 
